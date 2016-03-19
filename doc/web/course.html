@@ -1,0 +1,238 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Overview of course material: Computational Physics">
+
+<title>Overview of course material: Computational Physics</title>
+
+
+<style type="text/css">
+/* blueish style */
+
+/* Color definitions:  http://www.december.com/html/spec/color0.html
+   CSS examples:       http://www.w3schools.com/css/css_examples.asp */
+
+body {
+  margin-top: 1.0em;
+  background-color: #ffffff;
+  font-family: Helvetica, Arial, FreeSans, san-serif;
+  color: #000000;
+}
+h1 { font-size: 1.8em; color: #1e36ce; }
+h2 { font-size: 1.6em; color: #1e36ce; }
+h3 { font-size: 1.4em; color: #1e36ce; }
+a { color: #1e36ce; text-decoration:none; }
+tt { font-family: "Courier New", Courier; }
+/* pre style removed because it will interfer with pygments */
+p { text-indent: 0px; }
+hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
+p.caption { width: 80%; font-style: normal; text-align: left; }
+hr.figure { border: 0; width: 80%; border-bottom: 1px solid #aaa}
+.alert-text-small   { font-size: 80%;  }
+.alert-text-large   { font-size: 130%; }
+.alert-text-normal  { font-size: 90%;  }
+.alert {
+  padding:8px 35px 8px 14px; margin-bottom:18px;
+  text-shadow:0 1px 0 rgba(255,255,255,0.5);
+  border:1px solid #bababa;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  color: #555;
+  background-color: #f8f8f8;
+  background-position: 10px 5px;
+  background-repeat: no-repeat;
+  background-size: 38px;
+  padding-left: 55px;
+  width: 75%;
+ }
+.alert-block {padding-top:14px; padding-bottom:14px}
+.alert-block > p, .alert-block > ul {margin-bottom:1em}
+.alert li {margin-top: 1em}
+.alert-block p+p {margin-top:5px}
+.alert-notice { background-image: url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_gray_notice.png); }
+.alert-summary  { background-image:url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_gray_summary.png); }
+.alert-warning { background-image: url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_gray_warning.png); }
+.alert-question {background-image:url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_gray_question.png); }
+
+div { text-align: justify; text-justify: inter-word; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [('Computational Physics  Notes', 1, None, '___sec0'),
+              ('Introduction to computational physics', 2, None, '___sec1'),
+              ('Diagonalization and eigenvalue problems', 2, None, '___sec2'),
+              ('Quantum mechanical systems', 2, None, '___sec3')]}
+end of tocinfo -->
+
+<body>
+
+    
+<!-- ------------------- main content ---------------------- -->
+
+<!-- Strange way of testing for vortex... -->
+
+
+<center><h1>Overview of course material: Computational Physics</h1></center>  <!-- document title -->
+
+<p>
+<!-- author(s): <a href="http://mhjgit.github.io/info/" target="_self">Morten Hjorth-Jensen</a> -->
+
+<center>
+<b><a href="http://mhjgit.github.io/info/" target="_self">Morten Hjorth-Jensen</a></b> [1, 2]
+</center>
+
+<p>
+<!-- institution(s) -->
+
+<center>[1] <b>Department of Physics and Astronomy and National Superconducting Cyclotron Laboratory, Michigan State University</b></center>
+<center>[2] <b>Department of Physics, University of Oslo</b></center>
+<br>
+
+<p>
+The teaching material is produced in various formats for printing and on-screen reading.
+
+<p>
+<!-- !split -->
+<div class="alert alert-block alert-warning alert-text-normal">
+<b>Warning.</b>
+<p>
+The PDF files are based on LaTeX and have seldom technical
+failures that cannot be easily corrected.
+The HTML-based files, called &quot;HTML&quot; and &quot;ipynb&quot; below, apply MathJax
+for rendering LaTeX formulas and sometimes this technology gives rise
+to unexpected failures (e.g.,
+incorrect rendering in a web page despite correct LaTeX syntax in the
+formula). Consult the corresponding PDF
+files if you find missing or incorrectly rendered
+formulas in HTML or ipython notebook files.
+</div>
+
+
+<h1 id="___sec0">Computational Physics  Notes </h1>
+
+<h2 id="___sec1">Introduction to computational physics </h2>
+
+<ul>
+ <li> LaTeX PDF:</li>
+
+<ul>
+   <li> For printing:</li>
+
+<ul>
+     <li> <a href="http://compphysics.github.io/CompPhysUTunis/doc/pub/intro/pdf/intro-print.pdf" target="_self">Standard one-page format</a>, compact: <a href="http://compphysics.github.io/CompPhysUTunis/doc/pub/intro/pdf/intro-print6.pdf" target="_self">6 pages per sheet</a></li>
+</ul>
+
+   <li> For screen viewing:</li>
+
+<ul>
+     <li> <a href="http://compphysics.github.io/CompPhysUTunis/doc/pub/intro/pdf/intro-beamer.pdf" target="_self">standard Beamer format</a></li>
+</ul>
+
+</ul>
+
+ <li> HTML:</li>
+
+<ul>
+   <li> <a href="http://compphysics.github.io/CompPhysUTunis/doc/pub/intro/html/intro.html" target="_self">Plain html</a></li>
+   <li> <a href="http://compphysics.github.io/CompPhysUTunis/doc/pub/intro/html/intro-reveal.html" target="_self">reveal.js beige slide style</a></li>
+   <li> <a href="http://compphysics.github.io/CompPhysUTunis/doc/pub/intro/html/intro-bs.html" target="_self">Bootstrap  slide style, easy for reading on mobile devices</a></li>
+</ul>
+
+ <li> iPython notebook:</li>
+
+<ul>
+   <li> <a href="http://compphysics.github.io/CompPhysUTunis/doc/pub/intro/ipynb/intro.ipynb" target="_self">ipynb file</a></li>
+</ul>
+
+</ul>
+
+<h2 id="___sec2">Diagonalization and eigenvalue problems </h2>
+
+<ul>
+ <li> LaTeX PDF:</li>
+
+<ul>
+   <li> For printing:</li>
+
+<ul>
+     <li> <a href="http://compphysics.github.io/CompPhysUTunis/doc/pub/eigvalues/pdf/eigvalues-print.pdf" target="_self">Standard one-page format</a>, compact: <a href="http://compphysics.github.io/CompPhysUTunis/doc/pub/eigvalues/pdf/eigvalues-print6.pdf" target="_self">6 pages per sheet</a></li>
+</ul>
+
+   <li> For screen viewing:</li>
+
+<ul>
+     <li> <a href="http://compphysics.github.io/CompPhysUTunis/doc/pub/eigvalues/pdf/eigvalues-beamer.pdf" target="_self">standard Beamer format</a></li>
+</ul>
+
+</ul>
+
+ <li> HTML:</li>
+
+<ul>
+   <li> <a href="http://compphysics.github.io/CompPhysUTunis/doc/pub/eigvalues/html/eigvalues.html" target="_self">Plain html</a></li>
+   <li> <a href="http://compphysics.github.io/CompPhysUTunis/doc/pub/eigvalues/html/eigvalues-reveal.html" target="_self">reveal.js beige slide style</a></li>
+   <li> <a href="http://compphysics.github.io/CompPhysUTunis/doc/pub/eigvalues/html/eigvalues-bs.html" target="_self">Bootstrap  slide style, easy for reading on mobile devices</a></li>
+</ul>
+
+ <li> iPython notebook:</li>
+
+<ul>
+   <li> <a href="http://compphysics.github.io/CompPhysUTunis/doc/pub/eigvalues/ipynb/eigvalues.ipynb" target="_self">ipynb file</a></li>
+</ul>
+
+</ul>
+
+<h2 id="___sec3">Quantum mechanical systems </h2>
+
+<ul>
+ <li> LaTeX PDF:</li>
+
+<ul>
+   <li> For printing:</li>
+
+<ul>
+     <li> <a href="http://compphysics.github.io/CompPhysUTunis/doc/pub/vmc/pdf/vmc-print.pdf" target="_self">Standard one-page format</a>, compact: <a href="http://compphysics.github.io/CompPhysUTunis/doc/pub/vmc/pdf/vmc-print6.pdf" target="_self">6 pages per sheet</a></li>
+</ul>
+
+   <li> For screen viewing:</li>
+
+<ul>
+     <li> <a href="http://compphysics.github.io/CompPhysUTunis/doc/pub/vmc/pdf/vmc-beamer.pdf" target="_self">standard Beamer format</a></li>
+</ul>
+
+</ul>
+
+ <li> HTML:</li>
+
+<ul>
+   <li> <a href="http://compphysics.github.io/CompPhysUTunis/doc/pub/vmc/html/vmc.html" target="_self">Plain html</a></li>
+   <li> <a href="http://compphysics.github.io/CompPhysUTunis/doc/pub/vmc/html/vmc-reveal.html" target="_self">reveal.js beige slide style</a></li>
+   <li> <a href="http://compphysics.github.io/CompPhysUTunis/doc/pub/vmc/html/vmc-bs.html" target="_self">Bootstrap  slide style, easy for reading on mobile devices</a></li>
+</ul>
+
+ <li> iPython notebook:</li>
+
+<ul>
+   <li> <a href="http://compphysics.github.io/CompPhysUTunis/doc/pub/vmc/ipynb/vmc.ipynb" target="_self">ipynb file</a></li>
+</ul>
+
+</ul>
+
+
+<!-- ------------------- end of main content --------------- -->
+
+
+</body>
+</html>
+    
+

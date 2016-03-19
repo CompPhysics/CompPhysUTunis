@@ -1,0 +1,69 @@
+# Strange way of testing for vortex...
+# #ifdef NON_VORTEX
+TITLE: Overview of course material: Computational Physics
+
+TOC: off
+# #else
+TITLE: Overview of course material: Computational Physics
+AUTHOR: "Morten Hjorth-Jensen":"http://mhjgit.github.io/info/" at Department of Physics and Astronomy and National Superconducting Cyclotron Laboratory, Michigan State University &  Department of Physics, University of Oslo
+# #endif
+
+<%
+pub_url = 'http://compphysics.github.io/CompPhysUTunis/doc/pub'
+published = ['intro', 'eigvalues', 'vmc', ]
+chapters = {
+ 'intro': 'Introduction to computational physics',
+ 'eigvalues': 'Diagonalization and eigenvalue problems',
+ 'vmc': 'Quantum mechanical systems',
+}
+%>
+
+
+
+
+
+<%def name="text_types(name)">
+
+ * LaTeX PDF:
+   * For printing:
+     * "Standard one-page format": "${pub_url}/${name}/pdf/${name}-print.pdf", compact: "6 pages per sheet": "${pub_url}/${name}/pdf/${name}-print6.pdf"
+   * For screen viewing:
+     * "standard Beamer format": "${pub_url}/${name}/pdf/${name}-beamer.pdf"
+ * HTML:
+   * "Plain html": "${pub_url}/${name}/html/${name}.html"
+   * "reveal.js beige slide style": "${pub_url}/${name}/html/${name}-reveal.html"
+   * "Bootstrap  slide style, easy for reading on mobile devices": "${pub_url}/${name}/html/${name}-bs.html"
+ * iPython notebook:
+   * "ipynb file": "${pub_url}/${name}/ipynb/${name}.ipynb"
+</%def>
+
+<%def name="slide_types(name)">
+</%def>
+
+The teaching material is produced in various formats for printing and on-screen reading.
+
+!split
+!bwarning
+The PDF files are based on LaTeX and have seldom technical
+failures that cannot be easily corrected.
+The HTML-based files, called ``HTML'' and ``ipynb'' below, apply MathJax
+for rendering LaTeX formulas and sometimes this technology gives rise
+to unexpected failures (e.g.,
+incorrect rendering in a web page despite correct LaTeX syntax in the
+formula). Consult the corresponding PDF
+files if you find missing or incorrectly rendered
+formulas in HTML or ipython notebook files.
+!ewarning
+
+
+
+======= Computational Physics  Notes =======
+
+% for ch in published:
+===== ${chapters[ch]} =====
+
+${text_types(ch)}
+
+% endfor
+
+
