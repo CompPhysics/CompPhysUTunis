@@ -1,0 +1,86 @@
+# Strange way of testing for vortex...
+TITLE: Overview of course material: Computational Physics
+AUTHOR: "Morten Hjorth-Jensen":"http://mhjgit.github.io/info/" at Department of Physics and Astronomy and National Superconducting Cyclotron Laboratory, Michigan State University &  Department of Physics, University of Oslo
+
+
+
+
+
+
+
+
+
+
+
+The teaching material is produced in various formats for printing and on-screen reading.
+
+!split
+!bwarning
+The PDF files are based on LaTeX and have seldom technical
+failures that cannot be easily corrected.
+The HTML-based files, called ``HTML'' and ``ipynb'' below, apply MathJax
+for rendering LaTeX formulas and sometimes this technology gives rise
+to unexpected failures (e.g.,
+incorrect rendering in a web page despite correct LaTeX syntax in the
+formula). Consult the corresponding PDF
+files if you find missing or incorrectly rendered
+formulas in HTML or ipython notebook files.
+!ewarning
+
+
+
+======= Computational Physics  Notes =======
+
+===== Introduction to computational physics =====
+
+
+
+ * LaTeX PDF:
+   * For printing:
+     * "Standard one-page format": "http://compphysics.github.io/CompPhysUTunis/doc/pub/intro/pdf/intro-print.pdf", compact: "6 pages per sheet": "http://compphysics.github.io/CompPhysUTunis/doc/pub/intro/pdf/intro-print6.pdf"
+   * For screen viewing:
+     * "standard Beamer format": "http://compphysics.github.io/CompPhysUTunis/doc/pub/intro/pdf/intro-beamer.pdf"
+ * HTML:
+   * "Plain html": "http://compphysics.github.io/CompPhysUTunis/doc/pub/intro/html/intro.html"
+   * "reveal.js beige slide style": "http://compphysics.github.io/CompPhysUTunis/doc/pub/intro/html/intro-reveal.html"
+   * "Bootstrap  slide style, easy for reading on mobile devices": "http://compphysics.github.io/CompPhysUTunis/doc/pub/intro/html/intro-bs.html"
+ * iPython notebook:
+   * "ipynb file": "http://compphysics.github.io/CompPhysUTunis/doc/pub/intro/ipynb/intro.ipynb"
+
+
+===== Diagonalization and eigenvalue problems =====
+
+
+
+ * LaTeX PDF:
+   * For printing:
+     * "Standard one-page format": "http://compphysics.github.io/CompPhysUTunis/doc/pub/eigvalues/pdf/eigvalues-print.pdf", compact: "6 pages per sheet": "http://compphysics.github.io/CompPhysUTunis/doc/pub/eigvalues/pdf/eigvalues-print6.pdf"
+   * For screen viewing:
+     * "standard Beamer format": "http://compphysics.github.io/CompPhysUTunis/doc/pub/eigvalues/pdf/eigvalues-beamer.pdf"
+ * HTML:
+   * "Plain html": "http://compphysics.github.io/CompPhysUTunis/doc/pub/eigvalues/html/eigvalues.html"
+   * "reveal.js beige slide style": "http://compphysics.github.io/CompPhysUTunis/doc/pub/eigvalues/html/eigvalues-reveal.html"
+   * "Bootstrap  slide style, easy for reading on mobile devices": "http://compphysics.github.io/CompPhysUTunis/doc/pub/eigvalues/html/eigvalues-bs.html"
+ * iPython notebook:
+   * "ipynb file": "http://compphysics.github.io/CompPhysUTunis/doc/pub/eigvalues/ipynb/eigvalues.ipynb"
+
+
+===== Quantum mechanical systems =====
+
+
+
+ * LaTeX PDF:
+   * For printing:
+     * "Standard one-page format": "http://compphysics.github.io/CompPhysUTunis/doc/pub/vmc/pdf/vmc-print.pdf", compact: "6 pages per sheet": "http://compphysics.github.io/CompPhysUTunis/doc/pub/vmc/pdf/vmc-print6.pdf"
+   * For screen viewing:
+     * "standard Beamer format": "http://compphysics.github.io/CompPhysUTunis/doc/pub/vmc/pdf/vmc-beamer.pdf"
+ * HTML:
+   * "Plain html": "http://compphysics.github.io/CompPhysUTunis/doc/pub/vmc/html/vmc.html"
+   * "reveal.js beige slide style": "http://compphysics.github.io/CompPhysUTunis/doc/pub/vmc/html/vmc-reveal.html"
+   * "Bootstrap  slide style, easy for reading on mobile devices": "http://compphysics.github.io/CompPhysUTunis/doc/pub/vmc/html/vmc-bs.html"
+ * iPython notebook:
+   * "ipynb file": "http://compphysics.github.io/CompPhysUTunis/doc/pub/vmc/ipynb/vmc.ipynb"
+
+
+
+
