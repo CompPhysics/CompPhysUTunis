@@ -1,15 +1,15 @@
-TITLE: Computational Physics
-AUTHOR: Morten Hjorth-Jensen {copyright, 1999-present|CC BY-NC} at Department of Physics, University of Oslo & Department of Physics and Astronomy and National Superconducting Cyclotron Laboratory, Michigan State University
+TITLE: Eigenvalue problems
+AUTHOR: Morten Hjorth-Jensen {copyright, 1999-present|CC BY-NC} at Department of Physics, University of Oslo, Norway & Department of Physics and Astronomy and National Superconducting Cyclotron Laboratory, Michigan State University, USA
 DATE: May 16-20 2016
 
 !split
 ===== Overview of eigenvalue discussion =====
-!bblock Eigenvalue problems and project 2
- * Discussion of Jacobi's algorithm, chapters 7.1-7.4
- * Presentation of project 2.
- * Discussion of Householder's and Francis' algorithms, chapter 7.5
- * Power methods, chapter 7.6
- * Lanczos' method, chapter 7.7
+!bblock Eigenvalue problems
+ * Discussion of Jacobi's algorithm
+ * Presentation of quantum dot problem for two electrons.
+ * Discussion of Householder's and Francis' algorithms
+ * Power methods
+ * Lanczos' method
 !eblock
 
 
@@ -716,9 +716,9 @@ void Jacobi_rotate ( mat A, mat R, int k, int l, int n )
 
 
 !split
-===== Discussion of project 2 =====
+===== Discussion of numerical project for two electrons =====
 !bblock 
-In project 1 we rewrote our original differential equation in terms of a discretized equation with approximations to the 
+We can write our original differential equation in terms of a discretized equation with approximations to the 
 derivatives as
 !bt
 \[
@@ -751,7 +751,7 @@ including the boundary conditions as a system of linear equations with  a large 
 
 
 !split
-===== Discussion of project 2 =====
+===== Discussion of numerical project =====
 !bblock 
 We are first interested in the solution of the radial part of Schroedinger's equation for one electron. This equation reads
 !bt
@@ -775,7 +775,7 @@ with $n=0,1,2,\dots$ and $l=0,1,2,\dots$.
 
 
 !split
-===== Discussion of project 2 =====
+===== Discussion of numerical project =====
 !bblock 
 Since we have made a transformation to spherical coordinates it means that 
 $r\in [0,\infty)$.  
@@ -793,7 +793,7 @@ The boundary conditions are $u(0)=0$ and $u(\infty)=0$.
 
 
 !split
-===== Discussion of project 2 =====
+===== Discussion of numerical project =====
 !bblock 
 We introduce a dimensionless variable $\rho = (1/\alpha) r$
 where $\alpha$ is a constant with dimension length and get
@@ -804,7 +804,7 @@ where $\alpha$ is a constant with dimension length and get
          \frac{\hbar^2}{2 m\alpha^2} \right ) u(\rho)  = E u(\rho) .
 \]
 !et
-In project 2 we choose $l=0$.
+In numerical project we choose $l=0$.
 Inserting $V(\rho) = (1/2) k \alpha^2\rho^2$ we end up with
 !bt
 \[
@@ -823,7 +823,7 @@ We multiply thereafter with $2m\alpha^2/\hbar^2$ on both sides and obtain
 
 
 !split
-===== Discussion of project 2 =====
+===== Discussion of numerical project =====
 !bblock 
 We have thus
 !bt
@@ -864,7 +864,7 @@ $\lambda_0=3,\lambda_1=7,\lambda_2=11,\dots .$
 
 
 !split
-===== Discussion of project 2 =====
+===== Discussion of numerical project =====
 !bblock 
 We use the by now standard
 expression for the second derivative of a function $u$
@@ -884,7 +884,7 @@ $\rho_{\mathrm{max}}=\infty$.
 
 
 !split
-===== Discussion of project 2 =====
+===== Discussion of numerical project =====
 !bblock 
 With a given number of steps, $n_{\mathrm{step}}$, we then 
 define the step $h$ as
@@ -916,7 +916,7 @@ where $V_i=\rho_i^2$ is the harmonic oscillator potential.
 
 
 !split
-===== Discussion of project 2 =====
+===== Discussion of numerical project =====
 !bblock 
 Define first the diagonal matrix element
 !bt
@@ -982,7 +982,7 @@ The solution is zero in both cases.
 
 
 !split
-===== Discussion of project 2 =====
+===== Discussion of numerical project =====
 !bblock 
 We are going to study two electrons in a harmonic oscillator well which
 also interact via a repulsive Coulomb interaction.
@@ -1005,7 +1005,7 @@ Schroedinger equation
 
 
 !split
-===== Discussion of project 2 =====
+===== Discussion of numerical project =====
 !bblock 
 Note that we deal with a two-electron wave function $u(r_1,r_2)$ and 
 two-electron energy $E^{(2)}$.
@@ -1025,7 +1025,7 @@ With these new coordinates, the radial Schroedinger equation reads
 
 
 !split
-===== Discussion of project 2 =====
+===== Discussion of numerical project =====
 !bblock 
 The equations for $r$ and $R$ can be separated via the ansatz for the 
 wave function $u(r,R) = \psi(r)\phi(R)$ and the energy is given by the sum
@@ -1048,7 +1048,7 @@ with $\beta e^2=1.44$ eVnm.
 
 
 !split
-===== Discussion of project 2 =====
+===== Discussion of numerical project =====
 !bblock 
 Adding this term, the $r$-dependent Schroedinger equation becomes
 !bt
@@ -1071,7 +1071,7 @@ steps, we arrive at
 
 
 !split
-===== Discussion of project 2 =====
+===== Discussion of numerical project =====
 !bblock 
 We want to manipulate this equation further to make it as similar to that in (a)
 as possible. We define a 'frequency' 
@@ -1096,7 +1096,7 @@ or
 
 
 !split
-===== Discussion of project 2 =====
+===== Discussion of numerical project =====
 !bblock 
 Defining 
 !bt
@@ -1114,7 +1114,7 @@ we can rewrite Schroedinger's equation as
 
 
 !split
-===== Discussion of project 2 =====
+===== Discussion of numerical project =====
 !bblock 
 We treat $\omega_r$ as a parameter which reflects the strength of the oscillator potential.
 
@@ -1125,7 +1125,7 @@ for the ground state only, that is the lowest-lying state.
 
 
 !split
-===== Discussion of project 2 =====
+===== Discussion of numerical project =====
 !bblock 
 With no repulsive Coulomb interaction 
 you should get a result which corresponds to 
@@ -1143,7 +1143,7 @@ The article can be retrieved from the following web address URL: "http://prola.a
 
 
 !split
-===== Discussion of project 2, simple program for one particle in a harmonic oscillator trap =====
+===== Discussion of numerical project, simple program for one particle in a harmonic oscillator trap =====
 !bblock 
 The following program uses the eigenvalue solver provided by Armadillo and returns the eigenvalues for the lowest states. You can run this code interactively if you use ipython notebook.
 !bc pycod 
@@ -1509,7 +1509,6 @@ changed by the transformation whereas the unprimed elements are unchanged.
 If we now choose $\theta$ to
 give the element $a_{21}^{'} = e^{'}= 0$ then we have the first
 eigenvalue  $= a_{11}^{'} = d_{1}^{'}$.
-(This is actually what you are doing in project 2!!)
 !eblock
 
 
