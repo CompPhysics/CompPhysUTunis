@@ -6,9 +6,9 @@ Automatically generated HTML file from DocOnce source
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
-<meta name="description" content="Computational Physics">
+<meta name="description" content="Eigenvalue problems">
 
-<title>Computational Physics</title>
+<title>Eigenvalue problems</title>
 
 
 <style type="text/css">
@@ -151,23 +151,26 @@ div { text-align: justify; text-justify: inter-word; }
                2,
                None,
                '___sec28'),
-              ('Discussion of project 2', 2, None, '___sec29'),
-              ('Discussion of project 2', 2, None, '___sec30'),
-              ('Discussion of project 2', 2, None, '___sec31'),
-              ('Discussion of project 2', 2, None, '___sec32'),
-              ('Discussion of project 2', 2, None, '___sec33'),
-              ('Discussion of project 2', 2, None, '___sec34'),
-              ('Discussion of project 2', 2, None, '___sec35'),
-              ('Discussion of project 2', 2, None, '___sec36'),
-              ('Discussion of project 2', 2, None, '___sec37'),
-              ('Discussion of project 2', 2, None, '___sec38'),
-              ('Discussion of project 2', 2, None, '___sec39'),
-              ('Discussion of project 2', 2, None, '___sec40'),
-              ('Discussion of project 2', 2, None, '___sec41'),
-              ('Discussion of project 2', 2, None, '___sec42'),
-              ('Discussion of project 2', 2, None, '___sec43'),
-              ('Discussion of project 2', 2, None, '___sec44'),
-              ('Discussion of project 2, simple program for one particle in a harmonic oscillator trap',
+              ('Discussion of numerical project for two electrons',
+               2,
+               None,
+               '___sec29'),
+              ('Discussion of numerical project', 2, None, '___sec30'),
+              ('Discussion of numerical project', 2, None, '___sec31'),
+              ('Discussion of numerical project', 2, None, '___sec32'),
+              ('Discussion of numerical project', 2, None, '___sec33'),
+              ('Discussion of numerical project', 2, None, '___sec34'),
+              ('Discussion of numerical project', 2, None, '___sec35'),
+              ('Discussion of numerical project', 2, None, '___sec36'),
+              ('Discussion of numerical project', 2, None, '___sec37'),
+              ('Discussion of numerical project', 2, None, '___sec38'),
+              ('Discussion of numerical project', 2, None, '___sec39'),
+              ('Discussion of numerical project', 2, None, '___sec40'),
+              ('Discussion of numerical project', 2, None, '___sec41'),
+              ('Discussion of numerical project', 2, None, '___sec42'),
+              ('Discussion of numerical project', 2, None, '___sec43'),
+              ('Discussion of numerical project', 2, None, '___sec44'),
+              ('Discussion of numerical project, simple program for one particle in a harmonic oscillator trap',
                2,
                None,
                '___sec45'),
@@ -306,7 +309,7 @@ MathJax.Hub.Config({
 
 
 
-<center><h1>Computational Physics</h1></center>  <!-- document title -->
+<center><h1>Eigenvalue problems</h1></center>  <!-- document title -->
 
 <p>
 <!-- author(s): Morten Hjorth-Jensen -->
@@ -318,8 +321,8 @@ MathJax.Hub.Config({
 <p>
 <!-- institution(s) -->
 
-<center>[1] <b>Department of Physics, University of Oslo</b></center>
-<center>[2] <b>Department of Physics and Astronomy and National Superconducting Cyclotron Laboratory, Michigan State University</b></center>
+<center>[1] <b>Department of Physics, University of Oslo, Norway</b></center>
+<center>[2] <b>Department of Physics and Astronomy and National Superconducting Cyclotron Laboratory, Michigan State University, USA</b></center>
 <br>
 <p>
 <center><h4>May 16-20 2016</h4></center> <!-- date -->
@@ -329,15 +332,15 @@ MathJax.Hub.Config({
 
 <h2 id="___sec0">Overview of eigenvalue discussion </h2>
 <div class="alert alert-block alert-block alert-text-normal">
-<b>Eigenvalue problems and project 2.</b>
+<b>Eigenvalue problems.</b>
 <p>
 
 <ul>
- <li> Discussion of Jacobi's algorithm, chapters 7.1-7.4</li>
- <li> Presentation of project 2.</li>
- <li> Discussion of Householder's and Francis' algorithms, chapter 7.5</li>
- <li> Power methods, chapter 7.6</li>
- <li> Lanczos' method, chapter 7.7</li>
+ <li> Discussion of Jacobi's algorithm</li>
+ <li> Presentation of quantum dot problem for two electrons.</li>
+ <li> Discussion of Householder's and Francis' algorithms</li>
+ <li> Power methods</li>
+ <li> Lanczos' method</li>
 </ul>
 </div>
 
@@ -1167,11 +1170,11 @@ Finding the new matrix elements
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec29">Discussion of project 2 </h2>
+<h2 id="___sec29">Discussion of numerical project for two electrons </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
-In project 1 we rewrote our original differential equation in terms of a discretized equation with approximations to the 
+We can write our original differential equation in terms of a discretized equation with approximations to the 
 derivatives as
 $$
     -\frac{u_{i+1} -2u_i +u_{i-i}}{h^2}=f(x_i,u(x_i)),
@@ -1202,7 +1205,7 @@ $$
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec30">Discussion of project 2 </h2>
+<h2 id="___sec30">Discussion of numerical project </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -1228,7 +1231,7 @@ with \( n=0,1,2,\dots \) and \( l=0,1,2,\dots \).
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec31">Discussion of project 2 </h2>
+<h2 id="___sec31">Discussion of numerical project </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -1249,7 +1252,7 @@ The boundary conditions are \( u(0)=0 \) and \( u(\infty)=0 \).
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec32">Discussion of project 2 </h2>
+<h2 id="___sec32">Discussion of numerical project </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -1261,7 +1264,7 @@ $$
          \frac{\hbar^2}{2 m\alpha^2} \right ) u(\rho)  = E u(\rho) .
 $$
 
-In project 2 we choose \( l=0 \).
+In numerical project we choose \( l=0 \).
 Inserting \( V(\rho) = (1/2) k \alpha^2\rho^2 \) we end up with
 $$
   -\frac{\hbar^2}{2 m \alpha^2} \frac{d^2}{d\rho^2} u(\rho) 
@@ -1279,7 +1282,7 @@ $$
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec33">Discussion of project 2 </h2>
+<h2 id="___sec33">Discussion of numerical project </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -1319,7 +1322,7 @@ the eigenvalues for \( l=0 \) are
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec34">Discussion of project 2 </h2>
+<h2 id="___sec34">Discussion of numerical project </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -1344,7 +1347,7 @@ You need to check your results for the energies against different values
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec35">Discussion of project 2 </h2>
+<h2 id="___sec35">Discussion of numerical project </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -1376,7 +1379,7 @@ where \( V_i=\rho_i^2 \) is the harmonic oscillator potential.
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec36">Discussion of project 2 </h2>
+<h2 id="___sec36">Discussion of numerical project </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -1444,7 +1447,7 @@ The solution is zero in both cases.
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec37">Discussion of project 2 </h2>
+<h2 id="___sec37">Discussion of numerical project </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -1468,7 +1471,7 @@ $$
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec38">Discussion of project 2 </h2>
+<h2 id="___sec38">Discussion of numerical project </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -1492,7 +1495,7 @@ $$
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec39">Discussion of project 2 </h2>
+<h2 id="___sec39">Discussion of numerical project </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -1517,7 +1520,7 @@ with \( \beta e^2=1.44 \) eVnm.
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec40">Discussion of project 2 </h2>
+<h2 id="___sec40">Discussion of numerical project </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -1541,7 +1544,7 @@ $$
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec41">Discussion of project 2 </h2>
+<h2 id="___sec41">Discussion of numerical project </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -1566,7 +1569,7 @@ $$
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec42">Discussion of project 2 </h2>
+<h2 id="___sec42">Discussion of numerical project </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -1585,7 +1588,7 @@ $$
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec43">Discussion of project 2 </h2>
+<h2 id="___sec43">Discussion of numerical project </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -1601,7 +1604,7 @@ for the ground state only, that is the lowest-lying state.
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec44">Discussion of project 2 </h2>
+<h2 id="___sec44">Discussion of numerical project </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -1625,7 +1628,7 @@ The article can be retrieved from the following web address <a href="http://prol
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec45">Discussion of project 2, simple program for one particle in a harmonic oscillator trap </h2>
+<h2 id="___sec45">Discussion of numerical project, simple program for one particle in a harmonic oscillator trap </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -2023,7 +2026,6 @@ changed by the transformation whereas the unprimed elements are unchanged.
 If we now choose \( \theta \) to
 give the element \( a_{21}^{'} = e^{'}= 0 \) then we have the first
 eigenvalue  \( = a_{11}^{'} = d_{1}^{'} \).
-(This is actually what you are doing in project 2!!)
 </div>
 
 
