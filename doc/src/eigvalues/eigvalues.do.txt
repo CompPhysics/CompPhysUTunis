@@ -14,6 +14,18 @@ DATE: May 16-20 2016
 
 
 !split
+===== The physical problem =====
+!bblock 
+ * Two fermions in a trap in two or three dimensions
+ * Or two bosons in a trap in two or three dimensions
+ * How to solve a one-body problem in an external potential
+ * Ground state and excited states
+!eblock
+
+
+
+
+!split
 ===== Eigenvalue problems, basic definitions =====
 !bblock 
 Let us consider the matrix $\mathbf{A}$ of dimension $n$. The eigenvalues of
