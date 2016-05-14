@@ -81,7 +81,10 @@ $(function () {
 <!-- tocinfo
 {'highest level': 2,
  'sections': [('Topics covered in this course', 2, None, '___sec0'),
-              ('Overarching aims of this course', 2, None, '___sec1'),
+              ('Overarching aims of this course, how to develop and finalize a numerical project',
+               2,
+               None,
+               '___sec1'),
               ('Learning outcomes', 2, None, '___sec2'),
               ('Why is computing comptence important?', 2, None, '___sec3'),
               ('Computing competence, what is it?', 2, None, '___sec4'),
@@ -113,7 +116,21 @@ $(function () {
               ('Additional benefits: A structure approach to solving problems',
                2,
                None,
-               '___sec15')]}
+               '___sec15'),
+              ('Literature', 2, None, '___sec16'),
+              ('Installing C++ and Fortran', 2, None, '___sec17'),
+              ('Installing and running python', 2, None, '___sec18'),
+              ('Optimization and profiling', 2, None, '___sec19'),
+              ('More on optimization', 2, None, '___sec20'),
+              ('Optimization and profiling', 2, None, '___sec21'),
+              ('Optimization and debugging', 2, None, '___sec22'),
+              ('How do I run MPI on a PC/Laptop? MPI', 2, None, '___sec23'),
+              ('Can I do it on my own PC/laptop? OpenMP installation',
+               2,
+               None,
+               '___sec24'),
+              ('Installing MPI', 2, None, '___sec25'),
+              ('Installing MPI and using Qt', 2, None, '___sec26')]}
 end of tocinfo -->
 
 <body>
@@ -172,14 +189,14 @@ This course aims at giving you an overview of important numerical methods for so
   <li> Object orientation, code optimization and High-performance computing aspects</li> 
 </ul>
 
-The main programming language will be c++, interspersed with Python examples in the slides.
+The main programming language will be c++ (and Fortran), with Python examples in the slides.
 </div>
 
 
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec1">Overarching aims of this course </h2>
+<h2 id="___sec1">Overarching aims of this course, how to develop and finalize a numerical project </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -190,8 +207,12 @@ insight in how to:
   <li> Develop a critical approach to all steps in a project, which methods are most relevant, which natural laws and physical processes are important. Sort out initial conditions and boundary conditions etc.</li>
   <li> To teach you structured scientific computing and learn to structure a project using for example object orientation.</li>
   <li> To give you a critical understanding of central mathematical algorithms and methods from numerical analysis. In particular their limits and stability criteria.</li>
-  <li> To show you how to use version control software to keep track of different versions of your normal project, how to verify and validate your codes and how to make your science reproducible.</li> 
+  <li> To show you how to use version control software to keep track of different versions of your normal project, how to verify and validate your codes and how to make your science reproducible. We will demonstrate this using <a href="https://git-scm.com/" target="_blank">git</a></li>
 </ul>
+
+and <a href="https://github.com" target="_blank">github</a>
+
+
 </div>
 
 
@@ -506,6 +527,289 @@ The conventions and techniques outlined here will save you a lot of time when yo
 <li> Tedious manual work with running programs is automated,</li>
 <li> Your scientific investigations are reproducible, scientific reports with top quality typesetting are produced both for paper and electronic devices.</li>
 </ol>
+</div>
+
+
+<p>
+<!-- !split --><br><br><br><br><br><br><br><br><br><br>
+
+<h2 id="___sec16">Literature </h2>
+<div class="alert alert-block alert-block alert-text-normal">
+<b></b>
+<p>
+
+<ul>
+<li> <a href="https://github.com/CompPhysics/ComputationalPhysicsMSU/blob/master/doc/Lectures/lectures2015.pdf" target="_blank">Lecture notes on Computational Physics  by Morten Hjorth-Jensen, C++, Fortran, and Python</a></li>
+<li> <a href="https://github.com/CompPhysics/ComputationalPhysicsMSU/blob/master/doc/Lectures/HPLpython.pdf" target="_blank">A Primer on Scientific Programming with Python by Hans Petter Langtangen</a></li>
+</ul>
+</div>
+
+
+<p>
+<!-- !split --><br><br><br><br><br><br><br><br><br><br>
+
+<h2 id="___sec17">Installing C++ and Fortran </h2>
+<div class="alert alert-block alert-block alert-text-normal">
+<b></b>
+<p>
+If you wish to use C++ or Fortran, we recommend normally 
+
+<ul>
+<li> C++: Use an Integrated Development Environment (IDE) like <a href="https://www.qt.io/ide/" target="_blank">Qt</a> which works on all platforms</li>
+<li> C++: Use the IDE <a href="https://msdn.microsoft.com/en-us/library/60k1461a.aspx" target="_blank">Visual C++</a>  for Windows as operating system or <a href="https://sourceforge.net/projects/orwelldevcpp/" target="_blank">Dev C++</a>.</li>
+<li> For Mac (OSX) and linux users the <a href="https://gcc.gnu.org/" target="_blank">GNU gcc and gfortran</a>  family of compilers are  widely used.</li>
+<li> <a href="https://software.intel.com/en-us/blogs/2013/01/03/free-intel-c-compilers-for-students-and-related-parallel-programming-tools" target="_blank">The Intel C++ and Fortran compilers</a> are excellent. Free versions exist for students.</li> 
+</ul>
+</div>
+
+
+<p>
+<!-- !split --><br><br><br><br><br><br><br><br><br><br>
+
+<h2 id="___sec18">Installing and running python </h2>
+<div class="alert alert-block alert-block alert-text-normal">
+<b></b>
+<p>
+
+<ul>
+<li> For Linux and OSX users python is included by default. Check which version by typing  in a terminal window</li>
+</ul>
+
+<p>
+
+<!-- code=c++ (!bc cppcod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">python <span style="color: #666666">-</span>v 
+</pre></div>
+<p>
+Additional packages may have to be installed. For OSX users I highly recommend installing python and additional packages using <a href="http://brew.sh/" target="_blank">brew</a>. This makes it extremely simple to add packages and install additional software. With brew there is no point for OSX users to use virtual machines. 
+
+<ul>
+<li> You can also install platform independent IDE versions like the <a href="https://www.enthought.com/products/epd/" target="_blank">Enthought Python Distribution</a> or <a href="https://www.continuum.io/downloads" target="_blank">Anaconda</a>.</li>
+<li> For Windows users, you may consider a virtual machine like <a href="https://my.vmware.com/group/vmware/details?productId=154&downloadGroup=WKST-716-WIN" target="_blank">VMware Ubuntu</a></li> 
+<li> You can also go directly to the <a href="https://www.python.org/downloads/" target="_blank">python website</a> and download the Windows version.</li> 
+</ul>
+
+If you want to run a python program in terminal mode, simply write
+<p>
+
+<!-- code=c++ (!bc cppcod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">python nameofprog.py 
+</pre></div>
+
+</div>
+
+
+<p>
+<!-- !split --><br><br><br><br><br><br><br><br><br><br>
+
+<h2 id="___sec19">Optimization and profiling </h2>
+<div class="alert alert-block alert-block alert-text-normal">
+<b></b>
+<p>
+
+<p>
+If you use C++ or Fortran without an IDE, you would compile as
+<p>
+
+<!-- code=c++ (!bc cppcod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">c<span style="color: #666666">++</span>  <span style="color: #666666">-</span>c  mycode.cpp
+c<span style="color: #666666">++</span>  <span style="color: #666666">-</span>o  mycode.exe  mycode.o
+</pre></div>
+<p>
+For Fortran replace with for example <b>gfortran</b> or <b>ifort</b>.
+This is what we call a flat compiler option and should be used when we develop the code.
+It produces normally a very large and slow code when translated into machine instructions.
+We use this option for debugging and for establishing the correct program output because
+every operation is done precisely as the user specified it.
+
+<p>
+It is instructive to look up the compiler manual for further instructions by writing for example
+<p>
+
+<!-- code=c++ (!bc cppcod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">man c<span style="color: #666666">++</span>
+</pre></div>
+
+</div>
+
+<!-- !split --><br><br><br><br><br><br><br><br><br><br>
+
+<h2 id="___sec20">More on optimization </h2>
+<div class="alert alert-block alert-block alert-text-normal">
+<b></b>
+<p>
+We have additional compiler options for optimization. These may include procedure inlining where 
+performance may be improved, moving constants inside loops outside the loop, 
+identify potential parallelism, include automatic vectorization or replace a division with a reciprocal
+and a multiplication if this speeds up the code.
+<p>
+
+<!-- code=c++ (!bc cppcod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">c<span style="color: #666666">++</span>  <span style="color: #666666">-</span>O3 <span style="color: #666666">-</span>c  mycode.cpp
+c<span style="color: #666666">++</span>  <span style="color: #666666">-</span>O3 <span style="color: #666666">-</span>o  mycode.exe  mycode.o
+</pre></div>
+<p>
+This (other options are -O2 or -Ofast) is the recommended option.
+
+
+</div>
+
+<!-- !split --><br><br><br><br><br><br><br><br><br><br>
+
+<h2 id="___sec21">Optimization and profiling  </h2>
+<div class="alert alert-block alert-block alert-text-normal">
+<b></b>
+<p>
+It is also useful to profile your program under the development stage.
+You would then compile with 
+<p>
+
+<!-- code=c++ (!bc cppcod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">c<span style="color: #666666">++</span>  <span style="color: #666666">-</span>pg <span style="color: #666666">-</span>O3 <span style="color: #666666">-</span>c  mycode.cpp
+c<span style="color: #666666">++</span>  <span style="color: #666666">-</span>pg <span style="color: #666666">-</span>O3 <span style="color: #666666">-</span>o  mycode.exe  mycode.o
+</pre></div>
+<p>
+After you have run the code you can obtain the profiling information via
+<p>
+
+<!-- code=c++ (!bc cppcod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">gprof mycode.exe <span style="color: #666666">&gt;</span>  ProfileOutput
+</pre></div>
+<p>
+When you have profiled properly your code, you must take out this option as it 
+slows down performance.
+For memory tests use <a href="http://www.valgrind.org" target="_blank">valgrind</a>. An excellent environment for all these aspects, and much  more, is  "Qt creator":https://www.qt.io/ide/".
+
+
+</div>
+
+
+<p>
+<!-- !split --><br><br><br><br><br><br><br><br><br><br>
+
+<h2 id="___sec22">Optimization and debugging  </h2>
+<div class="alert alert-block alert-block alert-text-normal">
+<b></b>
+<p>
+Adding debugging options is a very useful alternative under the development stage of a program.
+You would then compile with 
+<p>
+
+<!-- code=c++ (!bc cppcod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">c<span style="color: #666666">++</span>  <span style="color: #666666">-</span>g <span style="color: #666666">-</span>O0 <span style="color: #666666">-</span>c  mycode.cpp
+c<span style="color: #666666">++</span>  <span style="color: #666666">-</span>g <span style="color: #666666">-</span>O0 <span style="color: #666666">-</span>o  mycode.exe  mycode.o
+</pre></div>
+<p>
+This option generates debugging information allowing you to trace for example if an array is properly allocated. Some compilers work best with the no optimization option <b>-O0</b>.
+</div>
+
+<div class="alert alert-block alert-block alert-text-normal">
+<b>Other optimization flags.</b>
+<p>
+Depending on the compiler, one can add flags which generate code that catches integer overflow errors. 
+The flag <b>-ftrapv</b> does this for the CLANG compiler on OS X operating systems.
+</div>
+
+
+<p>
+<!-- !split --><br><br><br><br><br><br><br><br><br><br>
+
+<h2 id="___sec23">How do I run MPI on a PC/Laptop? MPI  </h2>
+<div class="alert alert-block alert-block alert-text-normal">
+<b></b>
+<p>
+To install MPI is rather easy on hardware running unix/linux as operating systems, follow simply the instructions from the <a href="https://www.open-mpi.org/" target="_blank">OpenMPI website</a>. See also subsequent slides.
+When you have made sure you have installed MPI on your PC/laptop, 
+
+<ul>
+<li> Compile with mpicxx/mpic++ or mpif90</li>
+</ul>
+
+<p>
+
+<!-- code=c++ (!bc cppcod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">  <span style="color: #BC7A00"># Compile and link</span>
+  mpic<span style="color: #666666">++</span> <span style="color: #666666">-</span>O3 <span style="color: #666666">-</span>o nameofprog.x nameofprog.cpp
+  <span style="color: #BC7A00">#  run code with for example 8 processes using mpirun/mpiexec</span>
+  mpiexec <span style="color: #666666">-</span>n <span style="color: #666666">8</span> .<span style="color: #666666">/</span>nameofprog.x
+</pre></div>
+
+</div>
+
+
+<p>
+<!-- !split --><br><br><br><br><br><br><br><br><br><br>
+
+<h2 id="___sec24">Can I do it on my own PC/laptop? OpenMP installation </h2>
+<div class="alert alert-block alert-block alert-text-normal">
+<b></b>
+<p>
+If you wish to install MPI and OpenMP 
+on your laptop/PC, we recommend the following:
+
+<ul>
+<li> For OpenMP, the compile option <b>-fopenmp</b> is included automatically in recent versions of the C++ compiler and Fortran compilers. For users of different Linux distributions, siply use the available C++ or Fortran compilers and add the above compiler instructions, see also code examples below.</li> 
+<li> For OS X users however, use for example</li> 
+</ul>
+
+<p>
+
+<!-- code=c++ (!bc cppcod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">  brew install clang<span style="color: #666666">-</span>omp
+</pre></div>
+
+</div>
+
+
+<p>
+<!-- !split --><br><br><br><br><br><br><br><br><br><br>
+
+<h2 id="___sec25">Installing MPI </h2>
+<div class="alert alert-block alert-block alert-text-normal">
+<b></b>
+<p>
+For linux/ubuntu users, you need to install two packages (alternatively use the synaptic package manager)
+<p>
+
+<!-- code=c++ (!bc cppcod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">  sudo apt<span style="color: #666666">-</span>get install libopenmpi<span style="color: #666666">-</span>dev
+  sudo apt<span style="color: #666666">-</span>get install openmpi<span style="color: #666666">-</span>bin
+</pre></div>
+<p>
+For OS X users, install brew (after having installed xcode and gcc, needed for the 
+gfortran compiler of openmpi) and then install with brew
+<p>
+
+<!-- code=c++ (!bc cppcod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">   brew install openmpi
+</pre></div>
+<p>
+When running an executable (code.x), run as
+<p>
+
+<!-- code=c++ (!bc cppcod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">  mpirun <span style="color: #666666">-</span>n <span style="color: #666666">10</span> .<span style="color: #666666">/</span>code.x
+</pre></div>
+<p>
+where we indicate that we want  the number of processes to be 10.
+
+
+</div>
+
+
+<p>
+<!-- !split --><br><br><br><br><br><br><br><br><br><br>
+
+<h2 id="___sec26">Installing MPI and using Qt </h2>
+<div class="alert alert-block alert-block alert-text-normal">
+<b></b>
+<p>
+With openmpi installed, when using Qt, add to your .pro file the instructions <a href="http://dragly.org/2012/03/14/developing-mpi-applications-in-qt-creator/" target="_blank">here</a>
+
+<p>
+You may need to tell Qt where openmpi is stored.
+
+
 </div>
 
 
