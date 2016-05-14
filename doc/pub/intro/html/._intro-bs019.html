@@ -144,7 +144,7 @@ MathJax.Hub.Config({
      <!-- navigation toc: --> <li><a href="._intro-bs008.html#___sec7" style="font-size: 80%;">Shift from classical mathematics to modern computing?</a></li>
      <!-- navigation toc: --> <li><a href="._intro-bs009.html#___sec8" style="font-size: 80%;">Key principle in scientific modeling</a></li>
      <!-- navigation toc: --> <li><a href="._intro-bs010.html#___sec9" style="font-size: 80%;">Computing competence is central to solving scientific problems</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec10" style="font-size: 80%;">Modeling and computations</a></li>
+     <!-- navigation toc: --> <li><a href="._intro-bs011.html#___sec10" style="font-size: 80%;">Modeling and computations</a></li>
      <!-- navigation toc: --> <li><a href="._intro-bs012.html#___sec11" style="font-size: 80%;">Symbolic calculations and numerical calculations in one code</a></li>
      <!-- navigation toc: --> <li><a href="._intro-bs013.html#___sec12" style="font-size: 80%;">Error analysis</a></li>
      <!-- navigation toc: --> <li><a href="._intro-bs014.html#___sec13" style="font-size: 80%;">Integrating numerical mathematics with calculus</a></li>
@@ -152,7 +152,7 @@ MathJax.Hub.Config({
      <!-- navigation toc: --> <li><a href="._intro-bs016.html#___sec15" style="font-size: 80%;">Additional benefits: A structure approach to solving problems</a></li>
      <!-- navigation toc: --> <li><a href="._intro-bs017.html#___sec16" style="font-size: 80%;">Literature</a></li>
      <!-- navigation toc: --> <li><a href="._intro-bs018.html#___sec17" style="font-size: 80%;">Installing C++ and Fortran</a></li>
-     <!-- navigation toc: --> <li><a href="._intro-bs019.html#___sec18" style="font-size: 80%;">Installing and running python</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec18" style="font-size: 80%;">Installing and running python</a></li>
      <!-- navigation toc: --> <li><a href="._intro-bs020.html#___sec19" style="font-size: 80%;">Optimization and profiling</a></li>
      <!-- navigation toc: --> <li><a href="._intro-bs021.html#___sec20" style="font-size: 80%;">More on optimization</a></li>
      <!-- navigation toc: --> <li><a href="._intro-bs022.html#___sec21" style="font-size: 80%;">Optimization and profiling</a></li>
@@ -173,21 +173,39 @@ MathJax.Hub.Config({
 
 <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
 
-<a name="part0011"></a>
+<a name="part0019"></a>
 <!-- !split -->
 
-<h2 id="___sec10">Modeling and computations </h2>
+<h2 id="___sec18">Installing and running python </h2>
 <div class="panel panel-default">
 <div class="panel-body">
 <p> <!-- subsequent paragraphs come in larger fonts, so start with a paragraph -->
-In this course we will try to focus on how to 
 
 <ul>
-<li> Introduce Research based teaching  from day one</li>
-<li> Trigger further insights in math and other disciplines</li> 
-<li> Validation and verification of scientific results, with the possibility to emphasize ethical aspects as well. Version control is central.</li>
-<li> Introduce good project handling  practices from day one.</li>
+<li> For Linux and OSX users python is included by default. Check which version by typing  in a terminal window</li>
 </ul>
+
+<p>
+
+<!-- code=c++ (!bc cppcod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">python <span style="color: #666666">-</span>v 
+</pre></div>
+<p>
+Additional packages may have to be installed. For OSX users I highly recommend installing python and additional packages using <a href="http://brew.sh/" target="_self">brew</a>. This makes it extremely simple to add packages and install additional software. With brew there is no point for OSX users to use virtual machines. 
+
+<ul>
+<li> You can also install platform independent IDE versions like the <a href="https://www.enthought.com/products/epd/" target="_self">Enthought Python Distribution</a> or <a href="https://www.continuum.io/downloads" target="_self">Anaconda</a>.</li>
+<li> For Windows users, you may consider a virtual machine like <a href="https://my.vmware.com/group/vmware/details?productId=154&downloadGroup=WKST-716-WIN" target="_self">VMware Ubuntu</a></li> 
+<li> You can also go directly to the <a href="https://www.python.org/downloads/" target="_self">python website</a> and download the Windows version.</li> 
+</ul>
+
+If you want to run a python program in terminal mode, simply write
+<p>
+
+<!-- code=c++ (!bc cppcod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">python nameofprog.py 
+</pre></div>
+<p>
 </div>
 </div>
 
@@ -196,18 +214,10 @@ In this course we will try to focus on how to
 <p>
 <!-- navigation buttons at the bottom of the page -->
 <ul class="pagination">
-<li><a href="._intro-bs010.html">&laquo;</a></li>
+<li><a href="._intro-bs018.html">&laquo;</a></li>
   <li><a href="._intro-bs000.html">1</a></li>
   <li><a href="">...</a></li>
-  <li><a href="._intro-bs003.html">4</a></li>
-  <li><a href="._intro-bs004.html">5</a></li>
-  <li><a href="._intro-bs005.html">6</a></li>
-  <li><a href="._intro-bs006.html">7</a></li>
-  <li><a href="._intro-bs007.html">8</a></li>
-  <li><a href="._intro-bs008.html">9</a></li>
-  <li><a href="._intro-bs009.html">10</a></li>
-  <li><a href="._intro-bs010.html">11</a></li>
-  <li class="active"><a href="._intro-bs011.html">12</a></li>
+  <li><a href="._intro-bs011.html">12</a></li>
   <li><a href="._intro-bs012.html">13</a></li>
   <li><a href="._intro-bs013.html">14</a></li>
   <li><a href="._intro-bs014.html">15</a></li>
@@ -215,11 +225,16 @@ In this course we will try to focus on how to
   <li><a href="._intro-bs016.html">17</a></li>
   <li><a href="._intro-bs017.html">18</a></li>
   <li><a href="._intro-bs018.html">19</a></li>
-  <li><a href="._intro-bs019.html">20</a></li>
+  <li class="active"><a href="._intro-bs019.html">20</a></li>
   <li><a href="._intro-bs020.html">21</a></li>
-  <li><a href="">...</a></li>
+  <li><a href="._intro-bs021.html">22</a></li>
+  <li><a href="._intro-bs022.html">23</a></li>
+  <li><a href="._intro-bs023.html">24</a></li>
+  <li><a href="._intro-bs024.html">25</a></li>
+  <li><a href="._intro-bs025.html">26</a></li>
+  <li><a href="._intro-bs026.html">27</a></li>
   <li><a href="._intro-bs027.html">28</a></li>
-  <li><a href="._intro-bs012.html">&raquo;</a></li>
+  <li><a href="._intro-bs020.html">&raquo;</a></li>
 </ul>
 <!-- ------------------- end of main content --------------- -->
 
