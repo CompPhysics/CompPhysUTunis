@@ -27,6 +27,21 @@ Automatically generated HTML file from DocOnce source
 </style>
 
 
+<script src="http://sagecell.sagemath.org/static/jquery.min.js"></script>
+<script src="http://sagecell.sagemath.org/embedded_sagecell.js"></script>
+<link rel="stylesheet" type="text/css" href="https://sagecell.sagemath.org/static/sagecell_embed.css">
+<script>
+$(function () {
+    // Make the div with id 'mycell' a Sage cell
+    sagecell.makeSagecell({inputLocation:  '#mycell',
+                           template:       sagecell.templates.minimal,
+                           evalButtonText: 'Activate'});
+    // Make *any* div with class 'compute' a Sage cell
+    sagecell.makeSagecell({inputLocation: 'div.compute',
+                           evalButtonText: 'Evaluate'});
+});
+</script>
+
 </head>
 
 <!-- tocinfo
@@ -141,10 +156,7 @@ Automatically generated HTML file from DocOnce source
                2,
                None,
                '___sec46'),
-              ("Discussion of Householder's method for eigenvalues",
-               2,
-               None,
-               '___sec47'),
+              ('The corresponding Python program', 2, None, '___sec47'),
               ("Discussion of Householder's method for eigenvalues",
                2,
                None,
@@ -189,7 +201,7 @@ Automatically generated HTML file from DocOnce source
                2,
                None,
                '___sec58'),
-              ('Eigenvalues with the *QR* and Lanczos methods',
+              ("Discussion of Householder's method for eigenvalues",
                2,
                None,
                '___sec59'),
@@ -201,7 +213,7 @@ Automatically generated HTML file from DocOnce source
                2,
                None,
                '___sec61'),
-              ("Eigenvalues with the _QR_ algorithm and Lanczos' method",
+              ('Eigenvalues with the *QR* and Lanczos methods',
                2,
                None,
                '___sec62'),
@@ -233,24 +245,28 @@ Automatically generated HTML file from DocOnce source
                2,
                None,
                '___sec69'),
-              ("Eigenvalues and Lanczos' method", 2, None, '___sec70'),
+              ("Eigenvalues with the _QR_ algorithm and Lanczos' method",
+               2,
+               None,
+               '___sec70'),
+              ("Eigenvalues and Lanczos' method", 2, None, '___sec71'),
               ("Eigenvalues and Lanczos' method, tridiagonal matrix",
                2,
                None,
-               '___sec71'),
+               '___sec72'),
               ("Eigenvalues and Lanczos' method, tridiagonal and orthogonal matrices",
                2,
                None,
-               '___sec72'),
-              ("Eigenvalues and Lanczos' method", 2, None, '___sec73'),
+               '___sec73'),
+              ("Eigenvalues and Lanczos' method", 2, None, '___sec74'),
               ("Eigenvalues and Lanczos' method, defining the Lanczos' vectors",
                2,
                None,
-               '___sec74'),
+               '___sec75'),
               ("Eigenvalues and Lanczos' method, basic steps",
                2,
                None,
-               '___sec75')]}
+               '___sec76')]}
 end of tocinfo -->
 
 <body>
@@ -335,7 +351,7 @@ MathJax.Hub.Config({
      <!-- navigation toc: --> <li><a href="._eigvalues-bs045.html#___sec44" style="font-size: 80%;">Discussion of numerical project</a></li>
      <!-- navigation toc: --> <li><a href="._eigvalues-bs046.html#___sec45" style="font-size: 80%;">Discussion of numerical project</a></li>
      <!-- navigation toc: --> <li><a href="._eigvalues-bs047.html#___sec46" style="font-size: 80%;">Discussion of numerical project, simple program for one particle in a harmonic oscillator trap</a></li>
-     <!-- navigation toc: --> <li><a href="._eigvalues-bs048.html#___sec47" style="font-size: 80%;">Discussion of Householder's method for eigenvalues</a></li>
+     <!-- navigation toc: --> <li><a href="._eigvalues-bs048.html#___sec47" style="font-size: 80%;">The corresponding Python program</a></li>
      <!-- navigation toc: --> <li><a href="._eigvalues-bs049.html#___sec48" style="font-size: 80%;">Discussion of Householder's method for eigenvalues</a></li>
      <!-- navigation toc: --> <li><a href="._eigvalues-bs050.html#___sec49" style="font-size: 80%;">Discussion of Householder's method for eigenvalues</a></li>
      <!-- navigation toc: --> <li><a href="._eigvalues-bs051.html#___sec50" style="font-size: 80%;">Discussion of Householder's method for eigenvalues</a></li>
@@ -347,10 +363,10 @@ MathJax.Hub.Config({
      <!-- navigation toc: --> <li><a href="._eigvalues-bs057.html#___sec56" style="font-size: 80%;">Discussion of Householder's method for eigenvalues</a></li>
      <!-- navigation toc: --> <li><a href="._eigvalues-bs058.html#___sec57" style="font-size: 80%;">Discussion of Householder's method for eigenvalues</a></li>
      <!-- navigation toc: --> <li><a href="._eigvalues-bs059.html#___sec58" style="font-size: 80%;">Discussion of Householder's method for eigenvalues</a></li>
-     <!-- navigation toc: --> <li><a href="._eigvalues-bs060.html#___sec59" style="font-size: 80%;">Eigenvalues with the <em>QR</em> and Lanczos methods</a></li>
+     <!-- navigation toc: --> <li><a href="._eigvalues-bs060.html#___sec59" style="font-size: 80%;">Discussion of Householder's method for eigenvalues</a></li>
      <!-- navigation toc: --> <li><a href="._eigvalues-bs061.html#___sec60" style="font-size: 80%;">Eigenvalues with the <em>QR</em> and Lanczos methods</a></li>
      <!-- navigation toc: --> <li><a href="._eigvalues-bs062.html#___sec61" style="font-size: 80%;">Eigenvalues with the <em>QR</em> and Lanczos methods</a></li>
-     <!-- navigation toc: --> <li><a href="._eigvalues-bs063.html#___sec62" style="font-size: 80%;">Eigenvalues with the <b>QR</b> algorithm and Lanczos' method</a></li>
+     <!-- navigation toc: --> <li><a href="._eigvalues-bs063.html#___sec62" style="font-size: 80%;">Eigenvalues with the <em>QR</em> and Lanczos methods</a></li>
      <!-- navigation toc: --> <li><a href="._eigvalues-bs064.html#___sec63" style="font-size: 80%;">Eigenvalues with the <b>QR</b> algorithm and Lanczos' method</a></li>
      <!-- navigation toc: --> <li><a href="._eigvalues-bs065.html#___sec64" style="font-size: 80%;">Eigenvalues with the <b>QR</b> algorithm and Lanczos' method</a></li>
      <!-- navigation toc: --> <li><a href="._eigvalues-bs066.html#___sec65" style="font-size: 80%;">Eigenvalues with the <b>QR</b> algorithm and Lanczos' method</a></li>
@@ -358,12 +374,13 @@ MathJax.Hub.Config({
      <!-- navigation toc: --> <li><a href="._eigvalues-bs068.html#___sec67" style="font-size: 80%;">Eigenvalues with the <b>QR</b> algorithm and Lanczos' method</a></li>
      <!-- navigation toc: --> <li><a href="._eigvalues-bs069.html#___sec68" style="font-size: 80%;">Eigenvalues with the <b>QR</b> algorithm and Lanczos' method</a></li>
      <!-- navigation toc: --> <li><a href="._eigvalues-bs070.html#___sec69" style="font-size: 80%;">Eigenvalues with the <b>QR</b> algorithm and Lanczos' method</a></li>
-     <!-- navigation toc: --> <li><a href="._eigvalues-bs071.html#___sec70" style="font-size: 80%;">Eigenvalues and Lanczos' method</a></li>
-     <!-- navigation toc: --> <li><a href="._eigvalues-bs072.html#___sec71" style="font-size: 80%;">Eigenvalues and Lanczos' method, tridiagonal matrix</a></li>
-     <!-- navigation toc: --> <li><a href="._eigvalues-bs073.html#___sec72" style="font-size: 80%;">Eigenvalues and Lanczos' method, tridiagonal and orthogonal matrices</a></li>
-     <!-- navigation toc: --> <li><a href="._eigvalues-bs074.html#___sec73" style="font-size: 80%;">Eigenvalues and Lanczos' method</a></li>
-     <!-- navigation toc: --> <li><a href="._eigvalues-bs075.html#___sec74" style="font-size: 80%;">Eigenvalues and Lanczos' method, defining the Lanczos' vectors</a></li>
-     <!-- navigation toc: --> <li><a href="._eigvalues-bs076.html#___sec75" style="font-size: 80%;">Eigenvalues and Lanczos' method, basic steps</a></li>
+     <!-- navigation toc: --> <li><a href="._eigvalues-bs071.html#___sec70" style="font-size: 80%;">Eigenvalues with the <b>QR</b> algorithm and Lanczos' method</a></li>
+     <!-- navigation toc: --> <li><a href="._eigvalues-bs072.html#___sec71" style="font-size: 80%;">Eigenvalues and Lanczos' method</a></li>
+     <!-- navigation toc: --> <li><a href="._eigvalues-bs073.html#___sec72" style="font-size: 80%;">Eigenvalues and Lanczos' method, tridiagonal matrix</a></li>
+     <!-- navigation toc: --> <li><a href="._eigvalues-bs074.html#___sec73" style="font-size: 80%;">Eigenvalues and Lanczos' method, tridiagonal and orthogonal matrices</a></li>
+     <!-- navigation toc: --> <li><a href="._eigvalues-bs075.html#___sec74" style="font-size: 80%;">Eigenvalues and Lanczos' method</a></li>
+     <!-- navigation toc: --> <li><a href="._eigvalues-bs076.html#___sec75" style="font-size: 80%;">Eigenvalues and Lanczos' method, defining the Lanczos' vectors</a></li>
+     <!-- navigation toc: --> <li><a href="._eigvalues-bs077.html#___sec76" style="font-size: 80%;">Eigenvalues and Lanczos' method, basic steps</a></li>
 
         </ul>
       </li>
@@ -438,7 +455,7 @@ successively larger Krylov subspaces.
   <li><a href="._eigvalues-bs022.html">23</a></li>
   <li><a href="._eigvalues-bs023.html">24</a></li>
   <li><a href="">...</a></li>
-  <li><a href="._eigvalues-bs076.html">77</a></li>
+  <li><a href="._eigvalues-bs077.html">78</a></li>
   <li><a href="._eigvalues-bs015.html">&raquo;</a></li>
 </ul>
 <!-- ------------------- end of main content --------------- -->
