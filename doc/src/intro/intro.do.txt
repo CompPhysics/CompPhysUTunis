@@ -27,8 +27,7 @@ insight in how to:
   * Develop a critical approach to all steps in a project, which methods are most relevant, which natural laws and physical processes are important. Sort out initial conditions and boundary conditions etc.
   * To teach you structured scientific computing and learn to structure a project using for example object orientation.
   * To give you a critical understanding of central mathematical algorithms and methods from numerical analysis. In particular their limits and stability criteria.
-  * To show you how to use version control software to keep track of different versions of your normal project, how to verify and validate your codes and how to make your science reproducible. We will demonstrate this using "git":"https://git-scm.com/"
-and "github":"https://github.com"
+  * To show you how to use version control software to keep track of different versions of your normal project, how to verify and validate your codes and how to make your science reproducible. We will demonstrate this using "git":"https://git-scm.com/" and "github":"https://github.com"
 
 !eblock
 
@@ -364,7 +363,7 @@ gprof mycode.exe >  ProfileOutput
 !ec
 When you have profiled properly your code, you must take out this option as it 
 slows down performance.
-For memory tests use "valgrind":"http://www.valgrind.org". An excellent environment for all these aspects, and much  more, is  "Qt creator":https://www.qt.io/ide/".
+For memory tests use "valgrind":"http://www.valgrind.org". An excellent environment for all these aspects, and much  more, is  "Qt creator":"https://www.qt.io/ide/".
 
 !eblock
 
