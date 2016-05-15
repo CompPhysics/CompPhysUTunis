@@ -130,7 +130,32 @@ $(function () {
                None,
                '___sec24'),
               ('Installing MPI', 2, None, '___sec25'),
-              ('Installing MPI and using Qt', 2, None, '___sec26')]}
+              ('Installing MPI and using Qt', 2, None, '___sec26'),
+              ('Matrix Handling in C/C++ and Fortran, Static and Dynamical allocation',
+               2,
+               None,
+               '___sec27'),
+              ('Matrix Handling in C/C++', 2, None, '___sec28'),
+              ('Matrix Handling in C/C++', 2, None, '___sec29'),
+              ('Matrix Handling in Fortran 90/95, dynamic allocation and deallocation',
+               2,
+               None,
+               '___sec30'),
+              ('Dynamic memory allocation in C/C++', 2, None, '___sec31'),
+              ('Matrix Handling in C/C++, Dynamic Allocation',
+               2,
+               None,
+               '___sec32'),
+              ('Armadillo, recommended!!', 2, None, '___sec33'),
+              ('Armadillo, simple examples', 2, None, '___sec34'),
+              ('Armadillo, how to compile and install', 2, None, '___sec35'),
+              ('Armadillo, simple examples', 2, None, '___sec36'),
+              ('Armadillo, simple examples', 2, None, '___sec37'),
+              ('Armadillo, simple examples', 2, None, '___sec38'),
+              ('Armadillo, simple examples', 2, None, '___sec39'),
+              ('Armadillo, simple examples', 2, None, '___sec40'),
+              ('Armadillo, simple examples', 2, None, '___sec41'),
+              ('Armadillo, simple examples', 2, None, '___sec42')]}
 end of tocinfo -->
 
 <body>
@@ -809,6 +834,455 @@ You may need to tell Qt where openmpi is stored.
 </div>
 
 
+<p>
+<!-- !split --><br><br><br><br><br><br><br><br><br><br>
+
+<h2 id="___sec27">Matrix Handling in C/C++ and Fortran, Static and Dynamical allocation </h2>
+
+<p>
+<div class="alert alert-block alert-block alert-text-normal">
+<b>Static.</b>
+<p>
+We have  an \( N\times N \) matrix A  with \( N=100 \)
+In C/C++ this would be  defined as
+
+<p>
+
+<!-- code=c++ (!bc cppcod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">   <span style="color: #B00040">int</span> N <span style="color: #666666">=</span> <span style="color: #666666">100</span>;
+   <span style="color: #B00040">double</span> A[<span style="color: #666666">100</span>][<span style="color: #666666">100</span>];
+   <span style="color: #408080; font-style: italic">//   initialize all elements to zero</span>
+   <span style="color: #008000; font-weight: bold">for</span>(i<span style="color: #666666">=0</span> ; i <span style="color: #666666">&lt;</span> N ; i<span style="color: #666666">++</span>) {
+      <span style="color: #008000; font-weight: bold">for</span>(j<span style="color: #666666">=0</span> ; j <span style="color: #666666">&lt;</span> N ; j<span style="color: #666666">++</span>) {
+         A[i][j] <span style="color: #666666">=</span> <span style="color: #666666">0.0</span>;
+</pre></div>
+<p>
+Note the way the matrix is organized, row-major order.
+</div>
+
+
+<p>
+<!-- !split --><br><br><br><br><br><br><br><br><br><br>
+
+<h2 id="___sec28">Matrix Handling in C/C++ </h2>
+
+<p>
+<div class="alert alert-block alert-block alert-text-normal">
+<b>Row Major Order, Addition.</b>
+<p>
+We have  \( N\times N \) matrices A, B and C and we wish to
+evaluate \( A=B+C \).
+
+$$
+\mathbf{A}= \mathbf{B}\pm\mathbf{C}  \Longrightarrow a_{ij} = b_{ij}\pm c_{ij},
+$$
+
+In C/C++ this would be coded like
+
+<p>
+
+<!-- code=c++ (!bc cppcod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">   <span style="color: #008000; font-weight: bold">for</span>(i<span style="color: #666666">=0</span> ; i <span style="color: #666666">&lt;</span> N ; i<span style="color: #666666">++</span>) {
+      <span style="color: #008000; font-weight: bold">for</span>(j<span style="color: #666666">=0</span> ; j <span style="color: #666666">&lt;</span> N ; j<span style="color: #666666">++</span>) {
+         a[i][j] <span style="color: #666666">=</span> b[i][j]<span style="color: #666666">+</span>c[i][j]
+</pre></div>
+
+</div>
+
+
+<p>
+<!-- !split --><br><br><br><br><br><br><br><br><br><br>
+
+<h2 id="___sec29">Matrix Handling in C/C++ </h2>
+
+<p>
+<div class="alert alert-block alert-block alert-text-normal">
+<b>Row Major Order, Multiplication.</b>
+<p>
+We have  \( N\times N \) matrices A, B and C and we wish to
+evaluate \( A=BC \).
+
+$$
+\mathbf{A}=\mathbf{BC}   \Longrightarrow a_{ij} = \sum_{k=1}^{n} b_{ik}c_{kj},
+$$
+
+In C/C++ this would be coded like
+
+<p>
+
+<!-- code=c++ (!bc cppcod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">   <span style="color: #008000; font-weight: bold">for</span>(i<span style="color: #666666">=0</span> ; i <span style="color: #666666">&lt;</span> N ; i<span style="color: #666666">++</span>) {
+      <span style="color: #008000; font-weight: bold">for</span>(j<span style="color: #666666">=0</span> ; j <span style="color: #666666">&lt;</span> N ; j<span style="color: #666666">++</span>) {
+         <span style="color: #008000; font-weight: bold">for</span>(k<span style="color: #666666">=0</span> ; k <span style="color: #666666">&lt;</span> N ; k<span style="color: #666666">++</span>) {
+            a[i][j]<span style="color: #666666">+=</span>b[i][k]<span style="color: #666666">*</span>c[k][j];
+</pre></div>
+
+</div>
+
+
+<p>
+<!-- !split --><br><br><br><br><br><br><br><br><br><br>
+
+<h2 id="___sec30">Matrix Handling in Fortran 90/95, dynamic allocation and deallocation </h2>
+
+<p>
+<div class="alert alert-block alert-block alert-text-normal">
+<b>Column Major Order.</b>
+<p>
+<p>
+
+<!-- code=fortran (!bc fcod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">   <span style="color: #008000; font-weight: bold">ALLOCATE</span> (a(N,N), b(N,N), c(N,N))
+   <span style="color: #008000; font-weight: bold">DO </span>j<span style="color: #666666">=1</span>,  N
+      <span style="color: #008000; font-weight: bold">DO </span>i<span style="color: #666666">=1</span>, N
+         a(i,j)<span style="color: #666666">=</span>b(i,j)<span style="color: #666666">+</span>c(i,j)
+      ENDDO
+   ENDDO
+   ...
+   <span style="color: #008000; font-weight: bold">DEALLOCATE</span>(a,b,c)
+</pre></div>
+<p>
+Fortran 90 writes the above statements in a much simpler way
+
+<p>
+
+<!-- code=fortran (!bc fcod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">   a<span style="color: #666666">=</span>b<span style="color: #666666">+</span>c
+</pre></div>
+<p>
+Multiplication
+
+<p>
+
+<!-- code=fortran (!bc fcod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">   a<span style="color: #666666">=</span><span style="color: #008000">MATMUL</span>(b,c)
+</pre></div>
+<p>
+Fortran contains also the intrinsic functions TRANSPOSE and CONJUGATE.
+</div>
+
+
+<p>
+<!-- !split --><br><br><br><br><br><br><br><br><br><br>
+
+<h2 id="___sec31">Dynamic memory allocation in C/C++ </h2>
+
+<p>
+At least three possibilities in this course
+
+<ul>
+<li> Do it yourself with plain C/C++ functions like <b>new</b> and <b>delete</b>.</li> 
+<li> Use the functions provided in the <a href="https://github.com/CompPhysics/ComputationalPhysicsMSU/tree/master/doc/Programs/LecturePrograms/programs" target="_blank">library package lib.cpp</a></li>
+<li> Use Armadillo <a href="http://arma.sourceforgenet" target="_blank"><tt>http://arma.sourceforgenet</tt></a> (a C++ linear algebra library, discussion next two weeks, both here and at lab).</li> 
+<li> Write your own vector-matrix class or use the examples in the <a href="https://github.com/CompPhysics/ComputationalPhysicsMSU/tree/master/doc/Programs/CppQtCodesLectures/VectorClass" target="_blank">program folder</a></li>
+</ul>
+
+<!-- !split --><br><br><br><br><br><br><br><br><br><br>
+
+<h2 id="___sec32">Matrix Handling in C/C++, Dynamic Allocation </h2>
+
+<p>
+<div class="alert alert-block alert-block alert-text-normal">
+<b>Do it yourself.</b>
+<p>
+<p>
+
+<!-- code=c++ (!bc cppcod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #B00040">int</span> N;
+<span style="color: #B00040">double</span> <span style="color: #666666">**</span>  A;
+A <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">new</span> <span style="color: #B00040">double</span><span style="color: #666666">*</span>[N]
+<span style="color: #008000; font-weight: bold">for</span> ( i <span style="color: #666666">=</span> <span style="color: #666666">0</span>; i <span style="color: #666666">&lt;</span> N; i<span style="color: #666666">++</span>)
+    A[i] <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">new</span> <span style="color: #B00040">double</span>[N];
+</pre></div>
+<p>
+Always free space when you don't need an array anymore.
+
+<p>
+
+<!-- code=c++ (!bc cppcod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">for</span> ( i <span style="color: #666666">=</span> <span style="color: #666666">0</span>; i <span style="color: #666666">&lt;</span> N; i<span style="color: #666666">++</span>)
+    <span style="color: #008000; font-weight: bold">delete</span>[] A[i];
+<span style="color: #008000; font-weight: bold">delete</span>[] A;
+</pre></div>
+
+</div>
+
+
+<p>
+<!-- !split --><br><br><br><br><br><br><br><br><br><br>
+
+<h2 id="___sec33">Armadillo, recommended!! </h2>
+
+<ul>
+  <li> Armadillo is a C++ linear algebra library (matrix maths) aiming towards a good balance between speed and ease of use. The syntax is deliberately similar to Matlab.</li>
+  <li> Integer, floating point and complex numbers are supported, as well as a subset of trigonometric and statistics functions. Various matrix decompositions are provided through optional integration with LAPACK, or one of its high performance drop-in replacements (such as the multi-threaded MKL or ACML libraries).</li>
+  <li> A delayed evaluation approach is employed (at compile-time) to combine several operations into one and reduce (or eliminate) the need for temporaries. This is accomplished through recursive templates and template meta-programming.</li>
+  <li> Useful for conversion of research code into production environments, or if C++ has been decided as the language of choice, due to speed and/or integration capabilities.</li>
+  <li> The library is open-source software, and is distributed under a license that is useful in both open-source and commercial/proprietary contexts.</li>
+</ul>
+
+<!-- !split --><br><br><br><br><br><br><br><br><br><br>
+
+<h2 id="___sec34">Armadillo, simple examples </h2>
+
+<p>
+
+<!-- code=c++ (!bc cppcod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #BC7A00">#include &lt;iostream&gt;</span>
+<span style="color: #BC7A00">#include &lt;armadillo&gt;</span>
+
+<span style="color: #008000; font-weight: bold">using</span> <span style="color: #008000; font-weight: bold">namespace</span> std;
+<span style="color: #008000; font-weight: bold">using</span> <span style="color: #008000; font-weight: bold">namespace</span> arma;
+
+<span style="color: #B00040">int</span> <span style="color: #0000FF">main</span>(<span style="color: #B00040">int</span> argc, <span style="color: #B00040">char</span><span style="color: #666666">**</span> argv)
+  {
+  mat A <span style="color: #666666">=</span> randu<span style="color: #666666">&lt;</span>mat<span style="color: #666666">&gt;</span>(<span style="color: #666666">5</span>,<span style="color: #666666">5</span>);
+  mat B <span style="color: #666666">=</span> randu<span style="color: #666666">&lt;</span>mat<span style="color: #666666">&gt;</span>(<span style="color: #666666">5</span>,<span style="color: #666666">5</span>);
+
+  cout <span style="color: #666666">&lt;&lt;</span> A<span style="color: #666666">*</span>B <span style="color: #666666">&lt;&lt;</span> endl;
+
+  <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">0</span>;
+</pre></div>
+<p>
+<!-- !split --><br><br><br><br><br><br><br><br><br><br>
+
+<h2 id="___sec35">Armadillo, how to compile and install </h2>
+
+<p>
+For people using Ubuntu, Debian, Linux Mint, simply go to the synaptic package manager and install
+armadillo from there.
+You may have to install Lapack as well.
+For Mac and Windows users, follow the instructions from the webpage
+<a href="http://arma.sourceforge.net" target="_blank"><tt>http://arma.sourceforge.net</tt></a>. For Mac users we strongly recommend using <a href="http://brew.sh/" target="_blank">brew</a>
+To compile, use for example
+
+<p>
+
+<!-- code=c++ (!bc cppcod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">c<span style="color: #666666">++</span> <span style="color: #666666">-</span>O2 <span style="color: #666666">-</span>o program.x program.cpp  <span style="color: #666666">-</span>larmadillo <span style="color: #666666">-</span>llapack <span style="color: #666666">-</span>lblas
+</pre></div>
+<p>
+where the <code>-l</code> option indicates the library you wish to link to.
+
+<p>
+<!-- !split --><br><br><br><br><br><br><br><br><br><br>
+
+<h2 id="___sec36">Armadillo, simple examples </h2>
+
+<p>
+
+<!-- code=c++ (!bc cppcod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #BC7A00">#include &lt;iostream&gt;</span>
+<span style="color: #BC7A00">#include &quot;armadillo&quot;</span>
+<span style="color: #008000; font-weight: bold">using</span> <span style="color: #008000; font-weight: bold">namespace</span> arma;
+<span style="color: #008000; font-weight: bold">using</span> <span style="color: #008000; font-weight: bold">namespace</span> std;
+
+<span style="color: #B00040">int</span> <span style="color: #0000FF">main</span>(<span style="color: #B00040">int</span> argc, <span style="color: #B00040">char</span><span style="color: #666666">**</span> argv)
+  {
+  <span style="color: #408080; font-style: italic">// directly specify the matrix size (elements are uninitialised)</span>
+  mat A(<span style="color: #666666">2</span>,<span style="color: #666666">3</span>);
+  <span style="color: #408080; font-style: italic">// .n_rows = number of rows    (read only)</span>
+  <span style="color: #408080; font-style: italic">// .n_cols = number of columns (read only)</span>
+  cout <span style="color: #666666">&lt;&lt;</span> <span style="color: #BA2121">&quot;A.n_rows = &quot;</span> <span style="color: #666666">&lt;&lt;</span> A.n_rows <span style="color: #666666">&lt;&lt;</span> endl;
+  cout <span style="color: #666666">&lt;&lt;</span> <span style="color: #BA2121">&quot;A.n_cols = &quot;</span> <span style="color: #666666">&lt;&lt;</span> A.n_cols <span style="color: #666666">&lt;&lt;</span> endl;
+  <span style="color: #408080; font-style: italic">// directly access an element (indexing starts at 0)</span>
+  A(<span style="color: #666666">1</span>,<span style="color: #666666">2</span>) <span style="color: #666666">=</span> <span style="color: #666666">456.0</span>;
+  A.print(<span style="color: #BA2121">&quot;A:&quot;</span>);
+  <span style="color: #408080; font-style: italic">// scalars are treated as a 1x1 matrix,</span>
+  <span style="color: #408080; font-style: italic">// hence the code below will set A to have a size of 1x1</span>
+  A <span style="color: #666666">=</span> <span style="color: #666666">5.0</span>;
+  A.print(<span style="color: #BA2121">&quot;A:&quot;</span>);
+  <span style="color: #408080; font-style: italic">// if you want a matrix with all elements set to a particular value</span>
+  <span style="color: #408080; font-style: italic">// the .fill() member function can be used</span>
+  A.set_size(<span style="color: #666666">3</span>,<span style="color: #666666">3</span>);
+  A.fill(<span style="color: #666666">5.0</span>);  A.print(<span style="color: #BA2121">&quot;A:&quot;</span>);
+</pre></div>
+<p>
+<!-- !split --><br><br><br><br><br><br><br><br><br><br>
+
+<h2 id="___sec37">Armadillo, simple examples </h2>
+
+<p>
+
+<!-- code=c++ (!bc cppcod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">  mat B;
+
+  <span style="color: #408080; font-style: italic">// endr indicates &quot;end of row&quot;</span>
+  B <span style="color: #666666">&lt;&lt;</span> <span style="color: #666666">0.555950</span> <span style="color: #666666">&lt;&lt;</span> <span style="color: #666666">0.274690</span> <span style="color: #666666">&lt;&lt;</span> <span style="color: #666666">0.540605</span> <span style="color: #666666">&lt;&lt;</span> <span style="color: #666666">0.798938</span> <span style="color: #666666">&lt;&lt;</span> endr
+    <span style="color: #666666">&lt;&lt;</span> <span style="color: #666666">0.108929</span> <span style="color: #666666">&lt;&lt;</span> <span style="color: #666666">0.830123</span> <span style="color: #666666">&lt;&lt;</span> <span style="color: #666666">0.891726</span> <span style="color: #666666">&lt;&lt;</span> <span style="color: #666666">0.895283</span> <span style="color: #666666">&lt;&lt;</span> endr
+    <span style="color: #666666">&lt;&lt;</span> <span style="color: #666666">0.948014</span> <span style="color: #666666">&lt;&lt;</span> <span style="color: #666666">0.973234</span> <span style="color: #666666">&lt;&lt;</span> <span style="color: #666666">0.216504</span> <span style="color: #666666">&lt;&lt;</span> <span style="color: #666666">0.883152</span> <span style="color: #666666">&lt;&lt;</span> endr
+    <span style="color: #666666">&lt;&lt;</span> <span style="color: #666666">0.023787</span> <span style="color: #666666">&lt;&lt;</span> <span style="color: #666666">0.675382</span> <span style="color: #666666">&lt;&lt;</span> <span style="color: #666666">0.231751</span> <span style="color: #666666">&lt;&lt;</span> <span style="color: #666666">0.450332</span> <span style="color: #666666">&lt;&lt;</span> endr;
+
+  <span style="color: #408080; font-style: italic">// print to the cout stream</span>
+  <span style="color: #408080; font-style: italic">// with an optional string before the contents of the matrix</span>
+  B.print(<span style="color: #BA2121">&quot;B:&quot;</span>);
+
+  <span style="color: #408080; font-style: italic">// the &lt;&lt; operator can also be used to print the matrix</span>
+  <span style="color: #408080; font-style: italic">// to an arbitrary stream (cout in this case)</span>
+  cout <span style="color: #666666">&lt;&lt;</span> <span style="color: #BA2121">&quot;B:&quot;</span> <span style="color: #666666">&lt;&lt;</span> endl <span style="color: #666666">&lt;&lt;</span> B <span style="color: #666666">&lt;&lt;</span> endl;
+  <span style="color: #408080; font-style: italic">// save to disk</span>
+  B.save(<span style="color: #BA2121">&quot;B.txt&quot;</span>, raw_ascii);
+  <span style="color: #408080; font-style: italic">// load from disk</span>
+  mat C;
+  C.load(<span style="color: #BA2121">&quot;B.txt&quot;</span>);
+  C <span style="color: #666666">+=</span> <span style="color: #666666">2.0</span> <span style="color: #666666">*</span> B;
+  C.print(<span style="color: #BA2121">&quot;C:&quot;</span>);
+</pre></div>
+<p>
+<!-- !split --><br><br><br><br><br><br><br><br><br><br>
+
+<h2 id="___sec38">Armadillo, simple examples </h2>
+
+<p>
+
+<!-- code=c++ (!bc cppcod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">  <span style="color: #408080; font-style: italic">// submatrix types:</span>
+  <span style="color: #408080; font-style: italic">//</span>
+  <span style="color: #408080; font-style: italic">// .submat(first_row, first_column, last_row, last_column)</span>
+  <span style="color: #408080; font-style: italic">// .row(row_number)</span>
+  <span style="color: #408080; font-style: italic">// .col(column_number)</span>
+  <span style="color: #408080; font-style: italic">// .cols(first_column, last_column)</span>
+  <span style="color: #408080; font-style: italic">// .rows(first_row, last_row)</span>
+
+  cout <span style="color: #666666">&lt;&lt;</span> <span style="color: #BA2121">&quot;C.submat(0,0,3,1) =&quot;</span> <span style="color: #666666">&lt;&lt;</span> endl;
+  cout <span style="color: #666666">&lt;&lt;</span> C.submat(<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">3</span>,<span style="color: #666666">1</span>) <span style="color: #666666">&lt;&lt;</span> endl;
+
+  <span style="color: #408080; font-style: italic">// generate the identity matrix</span>
+  mat D <span style="color: #666666">=</span> eye<span style="color: #666666">&lt;</span>mat<span style="color: #666666">&gt;</span>(<span style="color: #666666">4</span>,<span style="color: #666666">4</span>);
+
+  D.submat(<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">3</span>,<span style="color: #666666">1</span>) <span style="color: #666666">=</span> C.cols(<span style="color: #666666">1</span>,<span style="color: #666666">2</span>);
+  D.print(<span style="color: #BA2121">&quot;D:&quot;</span>);
+
+  <span style="color: #408080; font-style: italic">// transpose</span>
+  cout <span style="color: #666666">&lt;&lt;</span> <span style="color: #BA2121">&quot;trans(B) =&quot;</span> <span style="color: #666666">&lt;&lt;</span> endl;
+  cout <span style="color: #666666">&lt;&lt;</span> trans(B) <span style="color: #666666">&lt;&lt;</span> endl;
+
+  <span style="color: #408080; font-style: italic">// maximum from each column (traverse along rows)</span>
+  cout <span style="color: #666666">&lt;&lt;</span> <span style="color: #BA2121">&quot;max(B) =&quot;</span> <span style="color: #666666">&lt;&lt;</span> endl;
+  cout <span style="color: #666666">&lt;&lt;</span> max(B) <span style="color: #666666">&lt;&lt;</span> endl;
+</pre></div>
+<p>
+<!-- !split --><br><br><br><br><br><br><br><br><br><br>
+
+<h2 id="___sec39">Armadillo, simple examples </h2>
+
+<p>
+
+<!-- code=c++ (!bc cppcod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">  <span style="color: #408080; font-style: italic">// maximum from each row (traverse along columns)</span>
+  cout <span style="color: #666666">&lt;&lt;</span> <span style="color: #BA2121">&quot;max(B,1) =&quot;</span> <span style="color: #666666">&lt;&lt;</span> endl;
+  cout <span style="color: #666666">&lt;&lt;</span> max(B,<span style="color: #666666">1</span>) <span style="color: #666666">&lt;&lt;</span> endl;
+  <span style="color: #408080; font-style: italic">// maximum value in B</span>
+  cout <span style="color: #666666">&lt;&lt;</span> <span style="color: #BA2121">&quot;max(max(B)) = &quot;</span> <span style="color: #666666">&lt;&lt;</span> max(max(B)) <span style="color: #666666">&lt;&lt;</span> endl;
+  <span style="color: #408080; font-style: italic">// sum of each column (traverse along rows)</span>
+  cout <span style="color: #666666">&lt;&lt;</span> <span style="color: #BA2121">&quot;sum(B) =&quot;</span> <span style="color: #666666">&lt;&lt;</span> endl;
+  cout <span style="color: #666666">&lt;&lt;</span> sum(B) <span style="color: #666666">&lt;&lt;</span> endl;
+  <span style="color: #408080; font-style: italic">// sum of each row (traverse along columns)</span>
+  cout <span style="color: #666666">&lt;&lt;</span> <span style="color: #BA2121">&quot;sum(B,1) =&quot;</span> <span style="color: #666666">&lt;&lt;</span> endl;
+  cout <span style="color: #666666">&lt;&lt;</span> sum(B,<span style="color: #666666">1</span>) <span style="color: #666666">&lt;&lt;</span> endl;
+  <span style="color: #408080; font-style: italic">// sum of all elements</span>
+  cout <span style="color: #666666">&lt;&lt;</span> <span style="color: #BA2121">&quot;sum(sum(B)) = &quot;</span> <span style="color: #666666">&lt;&lt;</span> sum(sum(B)) <span style="color: #666666">&lt;&lt;</span> endl;
+  cout <span style="color: #666666">&lt;&lt;</span> <span style="color: #BA2121">&quot;accu(B)     = &quot;</span> <span style="color: #666666">&lt;&lt;</span> accu(B) <span style="color: #666666">&lt;&lt;</span> endl;
+  <span style="color: #408080; font-style: italic">// trace = sum along diagonal</span>
+  cout <span style="color: #666666">&lt;&lt;</span> <span style="color: #BA2121">&quot;trace(B)    = &quot;</span> <span style="color: #666666">&lt;&lt;</span> trace(B) <span style="color: #666666">&lt;&lt;</span> endl;
+  <span style="color: #408080; font-style: italic">// random matrix -- values are uniformly distributed in the [0,1] interval</span>
+  mat E <span style="color: #666666">=</span> randu<span style="color: #666666">&lt;</span>mat<span style="color: #666666">&gt;</span>(<span style="color: #666666">4</span>,<span style="color: #666666">4</span>);
+  E.print(<span style="color: #BA2121">&quot;E:&quot;</span>);
+</pre></div>
+<p>
+<!-- !split --><br><br><br><br><br><br><br><br><br><br>
+
+<h2 id="___sec40">Armadillo, simple examples </h2>
+
+<p>
+
+<!-- code=c++ (!bc cppcod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">  <span style="color: #408080; font-style: italic">// row vectors are treated like a matrix with one row</span>
+  rowvec r;
+  r <span style="color: #666666">&lt;&lt;</span> <span style="color: #666666">0.59499</span> <span style="color: #666666">&lt;&lt;</span> <span style="color: #666666">0.88807</span> <span style="color: #666666">&lt;&lt;</span> <span style="color: #666666">0.88532</span> <span style="color: #666666">&lt;&lt;</span> <span style="color: #666666">0.19968</span>;
+  r.print(<span style="color: #BA2121">&quot;r:&quot;</span>);
+
+  <span style="color: #408080; font-style: italic">// column vectors are treated like a matrix with one column</span>
+  colvec q;
+  q <span style="color: #666666">&lt;&lt;</span> <span style="color: #666666">0.81114</span> <span style="color: #666666">&lt;&lt;</span> <span style="color: #666666">0.06256</span> <span style="color: #666666">&lt;&lt;</span> <span style="color: #666666">0.95989</span> <span style="color: #666666">&lt;&lt;</span> <span style="color: #666666">0.73628</span>;
+  q.print(<span style="color: #BA2121">&quot;q:&quot;</span>);
+
+  <span style="color: #408080; font-style: italic">// dot or inner product</span>
+  cout <span style="color: #666666">&lt;&lt;</span> <span style="color: #BA2121">&quot;as_scalar(r*q) = &quot;</span> <span style="color: #666666">&lt;&lt;</span> as_scalar(r<span style="color: #666666">*</span>q) <span style="color: #666666">&lt;&lt;</span> endl;
+
+    <span style="color: #408080; font-style: italic">// outer product</span>
+  cout <span style="color: #666666">&lt;&lt;</span> <span style="color: #BA2121">&quot;q*r =&quot;</span> <span style="color: #666666">&lt;&lt;</span> endl;
+  cout <span style="color: #666666">&lt;&lt;</span> q<span style="color: #666666">*</span>r <span style="color: #666666">&lt;&lt;</span> endl;
+
+
+  <span style="color: #408080; font-style: italic">// sum of three matrices (no temporary matrices are created)</span>
+  mat F <span style="color: #666666">=</span> B <span style="color: #666666">+</span> C <span style="color: #666666">+</span> D;
+  F.print(<span style="color: #BA2121">&quot;F:&quot;</span>);
+
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">0</span>;
+</pre></div>
+<p>
+<!-- !split --><br><br><br><br><br><br><br><br><br><br>
+
+<h2 id="___sec41">Armadillo, simple examples </h2>
+
+<p>
+
+<!-- code=c++ (!bc cppcod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #BC7A00">#include &lt;iostream&gt;</span>
+<span style="color: #BC7A00">#include &quot;armadillo&quot;</span>
+<span style="color: #008000; font-weight: bold">using</span> <span style="color: #008000; font-weight: bold">namespace</span> arma;
+<span style="color: #008000; font-weight: bold">using</span> <span style="color: #008000; font-weight: bold">namespace</span> std;
+
+<span style="color: #B00040">int</span> <span style="color: #0000FF">main</span>(<span style="color: #B00040">int</span> argc, <span style="color: #B00040">char</span><span style="color: #666666">**</span> argv)
+  {
+  cout <span style="color: #666666">&lt;&lt;</span> <span style="color: #BA2121">&quot;Armadillo version: &quot;</span> <span style="color: #666666">&lt;&lt;</span> arma_version<span style="color: #666666">::</span>as_string() <span style="color: #666666">&lt;&lt;</span> endl;
+
+  mat A;
+
+  A <span style="color: #666666">&lt;&lt;</span> <span style="color: #666666">0.165300</span> <span style="color: #666666">&lt;&lt;</span> <span style="color: #666666">0.454037</span> <span style="color: #666666">&lt;&lt;</span> <span style="color: #666666">0.995795</span> <span style="color: #666666">&lt;&lt;</span> <span style="color: #666666">0.124098</span> <span style="color: #666666">&lt;&lt;</span> <span style="color: #666666">0.047084</span> <span style="color: #666666">&lt;&lt;</span> endr
+    <span style="color: #666666">&lt;&lt;</span> <span style="color: #666666">0.688782</span> <span style="color: #666666">&lt;&lt;</span> <span style="color: #666666">0.036549</span> <span style="color: #666666">&lt;&lt;</span> <span style="color: #666666">0.552848</span> <span style="color: #666666">&lt;&lt;</span> <span style="color: #666666">0.937664</span> <span style="color: #666666">&lt;&lt;</span> <span style="color: #666666">0.866401</span> <span style="color: #666666">&lt;&lt;</span> endr
+    <span style="color: #666666">&lt;&lt;</span> <span style="color: #666666">0.348740</span> <span style="color: #666666">&lt;&lt;</span> <span style="color: #666666">0.479388</span> <span style="color: #666666">&lt;&lt;</span> <span style="color: #666666">0.506228</span> <span style="color: #666666">&lt;&lt;</span> <span style="color: #666666">0.145673</span> <span style="color: #666666">&lt;&lt;</span> <span style="color: #666666">0.491547</span> <span style="color: #666666">&lt;&lt;</span> endr
+    <span style="color: #666666">&lt;&lt;</span> <span style="color: #666666">0.148678</span> <span style="color: #666666">&lt;&lt;</span> <span style="color: #666666">0.682258</span> <span style="color: #666666">&lt;&lt;</span> <span style="color: #666666">0.571154</span> <span style="color: #666666">&lt;&lt;</span> <span style="color: #666666">0.874724</span> <span style="color: #666666">&lt;&lt;</span> <span style="color: #666666">0.444632</span> <span style="color: #666666">&lt;&lt;</span> endr
+    <span style="color: #666666">&lt;&lt;</span> <span style="color: #666666">0.245726</span> <span style="color: #666666">&lt;&lt;</span> <span style="color: #666666">0.595218</span> <span style="color: #666666">&lt;&lt;</span> <span style="color: #666666">0.409327</span> <span style="color: #666666">&lt;&lt;</span> <span style="color: #666666">0.367827</span> <span style="color: #666666">&lt;&lt;</span> <span style="color: #666666">0.385736</span> <span style="color: #666666">&lt;&lt;</span> endr;
+
+  A.print(<span style="color: #BA2121">&quot;A =&quot;</span>);
+
+  <span style="color: #408080; font-style: italic">// determinant</span>
+  cout <span style="color: #666666">&lt;&lt;</span> <span style="color: #BA2121">&quot;det(A) = &quot;</span> <span style="color: #666666">&lt;&lt;</span> det(A) <span style="color: #666666">&lt;&lt;</span> endl;
+</pre></div>
+<p>
+<!-- !split --><br><br><br><br><br><br><br><br><br><br>
+
+<h2 id="___sec42">Armadillo, simple examples </h2>
+
+<p>
+
+<!-- code=c++ (!bc cppcod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">  <span style="color: #408080; font-style: italic">// inverse</span>
+  cout <span style="color: #666666">&lt;&lt;</span> <span style="color: #BA2121">&quot;inv(A) = &quot;</span> <span style="color: #666666">&lt;&lt;</span> endl <span style="color: #666666">&lt;&lt;</span> inv(A) <span style="color: #666666">&lt;&lt;</span> endl;
+  <span style="color: #B00040">double</span> k <span style="color: #666666">=</span> <span style="color: #666666">1.23</span>;
+
+  mat    B <span style="color: #666666">=</span> randu<span style="color: #666666">&lt;</span>mat<span style="color: #666666">&gt;</span>(<span style="color: #666666">5</span>,<span style="color: #666666">5</span>);
+  mat    C <span style="color: #666666">=</span> randu<span style="color: #666666">&lt;</span>mat<span style="color: #666666">&gt;</span>(<span style="color: #666666">5</span>,<span style="color: #666666">5</span>);
+
+  rowvec r <span style="color: #666666">=</span> randu<span style="color: #666666">&lt;</span>rowvec<span style="color: #666666">&gt;</span>(<span style="color: #666666">5</span>);
+  colvec q <span style="color: #666666">=</span> randu<span style="color: #666666">&lt;</span>colvec<span style="color: #666666">&gt;</span>(<span style="color: #666666">5</span>);
+
+
+  <span style="color: #408080; font-style: italic">// examples of some expressions</span>
+  <span style="color: #408080; font-style: italic">// for which optimised implementations exist</span>
+  <span style="color: #408080; font-style: italic">// optimised implementation of a trinary expression</span>
+  <span style="color: #408080; font-style: italic">// that results in a scalar</span>
+  cout <span style="color: #666666">&lt;&lt;</span> <span style="color: #BA2121">&quot;as_scalar( r*inv(diagmat(B))*q ) = &quot;</span>;
+  cout <span style="color: #666666">&lt;&lt;</span> as_scalar( r<span style="color: #666666">*</span>inv(diagmat(B))<span style="color: #666666">*</span>q ) <span style="color: #666666">&lt;&lt;</span> endl;
+
+  <span style="color: #408080; font-style: italic">// example of an expression which is optimised</span>
+  <span style="color: #408080; font-style: italic">// as a call to the dgemm() function in BLAS:</span>
+  cout <span style="color: #666666">&lt;&lt;</span> <span style="color: #BA2121">&quot;k*trans(B)*C = &quot;</span> <span style="color: #666666">&lt;&lt;</span> endl <span style="color: #666666">&lt;&lt;</span> k<span style="color: #666666">*</span>trans(B)<span style="color: #666666">*</span>C;
+
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">0</span>;
+</pre></div>
 <p>
 
 <!-- ------------------- end of main content --------------- -->

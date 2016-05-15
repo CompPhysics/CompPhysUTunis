@@ -161,7 +161,7 @@ MathJax.Hub.Config({
         <ul class="dropdown-menu">
      <!-- navigation toc: --> <li><a href="._intro-bs001.html#___sec0" style="font-size: 80%;">Topics covered in this course</a></li>
      <!-- navigation toc: --> <li><a href="._intro-bs002.html#___sec1" style="font-size: 80%;">Overarching aims of this course, how to develop and finalize a numerical project</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec2" style="font-size: 80%;">Learning outcomes</a></li>
+     <!-- navigation toc: --> <li><a href="._intro-bs003.html#___sec2" style="font-size: 80%;">Learning outcomes</a></li>
      <!-- navigation toc: --> <li><a href="._intro-bs004.html#___sec3" style="font-size: 80%;">Why is computing comptence important?</a></li>
      <!-- navigation toc: --> <li><a href="._intro-bs005.html#___sec4" style="font-size: 80%;">Computing competence, what is it?</a></li>
      <!-- navigation toc: --> <li><a href="._intro-bs006.html#___sec5" style="font-size: 80%;">What is computing competence about?</a></li>
@@ -188,7 +188,7 @@ MathJax.Hub.Config({
      <!-- navigation toc: --> <li><a href="._intro-bs027.html#___sec26" style="font-size: 80%;">Installing MPI and using Qt</a></li>
      <!-- navigation toc: --> <li><a href="._intro-bs028.html#___sec27" style="font-size: 80%;">Matrix Handling in C/C++ and Fortran, Static and Dynamical allocation</a></li>
      <!-- navigation toc: --> <li><a href="._intro-bs029.html#___sec28" style="font-size: 80%;">Matrix Handling in C/C++</a></li>
-     <!-- navigation toc: --> <li><a href="._intro-bs030.html#___sec29" style="font-size: 80%;">Matrix Handling in C/C++</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec29" style="font-size: 80%;">Matrix Handling in C/C++</a></li>
      <!-- navigation toc: --> <li><a href="._intro-bs031.html#___sec30" style="font-size: 80%;">Matrix Handling in Fortran 90/95, dynamic allocation and deallocation</a></li>
      <!-- navigation toc: --> <li><a href="._intro-bs032.html#___sec31" style="font-size: 80%;">Dynamic memory allocation in C/C++</a></li>
      <!-- navigation toc: --> <li><a href="._intro-bs033.html#___sec32" style="font-size: 80%;">Matrix Handling in C/C++, Dynamic Allocation</a></li>
@@ -214,26 +214,33 @@ MathJax.Hub.Config({
 
 <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
 
-<a name="part0003"></a>
+<a name="part0030"></a>
 <!-- !split -->
 
-<h2 id="___sec2">Learning outcomes </h2>
+<h2 id="___sec29">Matrix Handling in C/C++ </h2>
+
+<p>
 <div class="panel panel-default">
 <div class="panel-body">
 <p> <!-- subsequent paragraphs come in larger fonts, so start with a paragraph -->
-We hope we can give you some useful hints and guidance on
+We have  \( N\times N \) matrices A, B and C and we wish to
+evaluate \( A=BC \).
 
-<ul>
- <li> how to develop a thorough understanding of how computing is used to solve scientific problems</li>
- <li> getting to know some central  algorithms used in science</li>
- <li> developing knowledge of high-performance computing elements: memory usage, vectorization and parallel algorithms</li>
- <li> understanding approximation errors and what can go wrong with algorithms</li>
- <li> getting experience with programming in a compiled language (Fortran, C, C++)</li>
- <li> getting experience with test frameworks and procedures</li>
- <li> being able to  critically evaluate results and errors</li>
- <li> understanding how to increase the efficiency of numerical algorithms and pertinent software</li>
- <li> understanding tools to make science reproducible and to develop a sound ethical approach to scientific problems</li>
-</ul>
+$$
+\mathbf{A}=\mathbf{BC}   \Longrightarrow a_{ij} = \sum_{k=1}^{n} b_{ik}c_{kj},
+$$
+
+In C/C++ this would be coded like
+
+<p>
+
+<!-- code=c++ (!bc cppcod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">   <span style="color: #008000; font-weight: bold">for</span>(i<span style="color: #666666">=0</span> ; i <span style="color: #666666">&lt;</span> N ; i<span style="color: #666666">++</span>) {
+      <span style="color: #008000; font-weight: bold">for</span>(j<span style="color: #666666">=0</span> ; j <span style="color: #666666">&lt;</span> N ; j<span style="color: #666666">++</span>) {
+         <span style="color: #008000; font-weight: bold">for</span>(k<span style="color: #666666">=0</span> ; k <span style="color: #666666">&lt;</span> N ; k<span style="color: #666666">++</span>) {
+            a[i][j]<span style="color: #666666">+=</span>b[i][k]<span style="color: #666666">*</span>c[k][j];
+</pre></div>
+<p>
 </div>
 </div>
 
@@ -242,23 +249,30 @@ We hope we can give you some useful hints and guidance on
 <p>
 <!-- navigation buttons at the bottom of the page -->
 <ul class="pagination">
-<li><a href="._intro-bs002.html">&laquo;</a></li>
+<li><a href="._intro-bs029.html">&laquo;</a></li>
   <li><a href="._intro-bs000.html">1</a></li>
-  <li><a href="._intro-bs001.html">2</a></li>
-  <li><a href="._intro-bs002.html">3</a></li>
-  <li class="active"><a href="._intro-bs003.html">4</a></li>
-  <li><a href="._intro-bs004.html">5</a></li>
-  <li><a href="._intro-bs005.html">6</a></li>
-  <li><a href="._intro-bs006.html">7</a></li>
-  <li><a href="._intro-bs007.html">8</a></li>
-  <li><a href="._intro-bs008.html">9</a></li>
-  <li><a href="._intro-bs009.html">10</a></li>
-  <li><a href="._intro-bs010.html">11</a></li>
-  <li><a href="._intro-bs011.html">12</a></li>
-  <li><a href="._intro-bs012.html">13</a></li>
+  <li><a href="">...</a></li>
+  <li><a href="._intro-bs022.html">23</a></li>
+  <li><a href="._intro-bs023.html">24</a></li>
+  <li><a href="._intro-bs024.html">25</a></li>
+  <li><a href="._intro-bs025.html">26</a></li>
+  <li><a href="._intro-bs026.html">27</a></li>
+  <li><a href="._intro-bs027.html">28</a></li>
+  <li><a href="._intro-bs028.html">29</a></li>
+  <li><a href="._intro-bs029.html">30</a></li>
+  <li class="active"><a href="._intro-bs030.html">31</a></li>
+  <li><a href="._intro-bs031.html">32</a></li>
+  <li><a href="._intro-bs032.html">33</a></li>
+  <li><a href="._intro-bs033.html">34</a></li>
+  <li><a href="._intro-bs034.html">35</a></li>
+  <li><a href="._intro-bs035.html">36</a></li>
+  <li><a href="._intro-bs036.html">37</a></li>
+  <li><a href="._intro-bs037.html">38</a></li>
+  <li><a href="._intro-bs038.html">39</a></li>
+  <li><a href="._intro-bs039.html">40</a></li>
   <li><a href="">...</a></li>
   <li><a href="._intro-bs043.html">44</a></li>
-  <li><a href="._intro-bs004.html">&raquo;</a></li>
+  <li><a href="._intro-bs031.html">&raquo;</a></li>
 </ul>
 <!-- ------------------- end of main content --------------- -->
 
