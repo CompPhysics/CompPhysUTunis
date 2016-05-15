@@ -8,7 +8,7 @@ in harmonic oscillator traps in two and three dimensions.
 
 For those of you who plan to use python, the following instructions (in French) may be useful. The introductory  slides contain also links to websites linking to C++, Fortran and Python sites and how to install these programming languages.
 
-*´*Python sur VMware Ubuntu
+*Python sur VMware Ubuntu*
 
 o Téléchargement de VMware Workstation 7.1.6 for Windows 32-bit and 64-bit with  VMware Tools  à partir du site officiel  https://my.vmware.com/group/vmware/details?productId=154&downloadGroup=WKST-716-WIN après avoir créé un compte.
 
