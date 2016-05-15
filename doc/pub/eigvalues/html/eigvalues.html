@@ -61,6 +61,21 @@ div { text-align: justify; text-justify: inter-word; }
 </style>
 
 
+<script src="http://sagecell.sagemath.org/static/jquery.min.js"></script>
+<script src="http://sagecell.sagemath.org/embedded_sagecell.js"></script>
+<link rel="stylesheet" type="text/css" href="https://sagecell.sagemath.org/static/sagecell_embed.css">
+<script>
+$(function () {
+    // Make the div with id 'mycell' a Sage cell
+    sagecell.makeSagecell({inputLocation:  '#mycell',
+                           template:       sagecell.templates.minimal,
+                           evalButtonText: 'Activate'});
+    // Make *any* div with class 'compute' a Sage cell
+    sagecell.makeSagecell({inputLocation: 'div.compute',
+                           evalButtonText: 'Evaluate'});
+});
+</script>
+
 </head>
 
 <!-- tocinfo
@@ -175,10 +190,7 @@ div { text-align: justify; text-justify: inter-word; }
                2,
                None,
                '___sec46'),
-              ("Discussion of Householder's method for eigenvalues",
-               2,
-               None,
-               '___sec47'),
+              ('The corresponding Python program', 2, None, '___sec47'),
               ("Discussion of Householder's method for eigenvalues",
                2,
                None,
@@ -223,7 +235,7 @@ div { text-align: justify; text-justify: inter-word; }
                2,
                None,
                '___sec58'),
-              ('Eigenvalues with the *QR* and Lanczos methods',
+              ("Discussion of Householder's method for eigenvalues",
                2,
                None,
                '___sec59'),
@@ -235,7 +247,7 @@ div { text-align: justify; text-justify: inter-word; }
                2,
                None,
                '___sec61'),
-              ("Eigenvalues with the _QR_ algorithm and Lanczos' method",
+              ('Eigenvalues with the *QR* and Lanczos methods',
                2,
                None,
                '___sec62'),
@@ -267,24 +279,28 @@ div { text-align: justify; text-justify: inter-word; }
                2,
                None,
                '___sec69'),
-              ("Eigenvalues and Lanczos' method", 2, None, '___sec70'),
+              ("Eigenvalues with the _QR_ algorithm and Lanczos' method",
+               2,
+               None,
+               '___sec70'),
+              ("Eigenvalues and Lanczos' method", 2, None, '___sec71'),
               ("Eigenvalues and Lanczos' method, tridiagonal matrix",
                2,
                None,
-               '___sec71'),
+               '___sec72'),
               ("Eigenvalues and Lanczos' method, tridiagonal and orthogonal matrices",
                2,
                None,
-               '___sec72'),
-              ("Eigenvalues and Lanczos' method", 2, None, '___sec73'),
+               '___sec73'),
+              ("Eigenvalues and Lanczos' method", 2, None, '___sec74'),
               ("Eigenvalues and Lanczos' method, defining the Lanczos' vectors",
                2,
                None,
-               '___sec74'),
+               '___sec75'),
               ("Eigenvalues and Lanczos' method, basic steps",
                2,
                None,
-               '___sec75')]}
+               '___sec76')]}
 end of tocinfo -->
 
 <body>
@@ -1650,53 +1666,46 @@ The article can be retrieved from the following web address <a href="http://prol
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
-The following program uses the eigenvalue solver provided by Armadillo and returns the eigenvalues for the lowest states. You can run this code interactively if you use ipython notebook.
+The following program uses the eigenvalue solver provided by Armadillo and returns the eigenvalues for the lowest states. You can run this code interactively if you use ipython notebook. To install armadillo, please go back to the introduction slides.
 <p>
 
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">%</span>install_ext https:<span style="color: #666666">//</span>raw<span style="color: #666666">.</span>github<span style="color: #666666">.</span>com<span style="color: #666666">/</span>dragly<span style="color: #666666">/</span>cppmagic<span style="color: #666666">/</span>master<span style="color: #666666">/</span>cppmagic<span style="color: #666666">.</span>py
-<span style="color: #666666">%</span>load_ext cppmagic
-</pre></div>
-<p>
+<!-- code=c++ (!bc cppcod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic">/*</span>
+<span style="color: #408080; font-style: italic">  Solves the one-particle Schrodinger equation</span>
+<span style="color: #408080; font-style: italic">  for a potential specified in function</span>
+<span style="color: #408080; font-style: italic">  potential(). This example is for the harmonic oscillator in 3d</span>
+<span style="color: #408080; font-style: italic">*/</span>
+<span style="color: #BC7A00">#include &lt;cmath&gt;</span>
+<span style="color: #BC7A00">#include &lt;iostream&gt;</span>
+<span style="color: #BC7A00">#include &lt;fstream&gt;</span>
+<span style="color: #BC7A00">#include &lt;iomanip&gt;</span>
+<span style="color: #BC7A00">#include &lt;armadillo&gt;</span>
 
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">%%</span>cpp <span style="color: #666666">-</span>I<span style="color: #666666">/</span>usr<span style="color: #666666">/</span>local<span style="color: #666666">/</span>include <span style="color: #666666">-</span>L<span style="color: #666666">/</span>usr<span style="color: #666666">/</span>local<span style="color: #666666">/</span>lib <span style="color: #666666">-</span>llapack <span style="color: #666666">-</span>lblas <span style="color: #666666">-</span>larmadillo
-<span style="color: #666666">/*</span>
-  Solves the one<span style="color: #666666">-</span>particle Schrodinger equation
-  <span style="color: #008000; font-weight: bold">for</span> a potential specified <span style="color: #AA22FF; font-weight: bold">in</span> function
-  potential()<span style="color: #666666">.</span> This example <span style="color: #AA22FF; font-weight: bold">is</span> <span style="color: #008000; font-weight: bold">for</span> the harmonic oscillator <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #666666">3</span>d
-<span style="color: #666666">*/</span>
-<span style="color: #408080; font-style: italic">#include &lt;cmath&gt;</span>
-<span style="color: #408080; font-style: italic">#include &lt;iostream&gt;</span>
-<span style="color: #408080; font-style: italic">#include &lt;fstream&gt;</span>
-<span style="color: #408080; font-style: italic">#include &lt;iomanip&gt;</span>
-<span style="color: #408080; font-style: italic">#include &lt;armadillo&gt;</span>
+<span style="color: #008000; font-weight: bold">using</span> <span style="color: #008000; font-weight: bold">namespace</span>  std;
+<span style="color: #008000; font-weight: bold">using</span> <span style="color: #008000; font-weight: bold">namespace</span>  arma;
 
-using namespace  std;
-using namespace  arma;
-
-double potential(double);
-void output(double, double, <span style="color: #008000">int</span>, vec<span style="color: #666666">&amp;</span> );
+<span style="color: #B00040">double</span> <span style="color: #0000FF">potential</span>(<span style="color: #B00040">double</span>);
+<span style="color: #B00040">void</span> <span style="color: #0000FF">output</span>(<span style="color: #B00040">double</span>, <span style="color: #B00040">double</span>, <span style="color: #B00040">int</span>, vec<span style="color: #666666">&amp;</span> );
 
 
-<span style="color: #666666">//</span> Begin of main program   
+<span style="color: #408080; font-style: italic">// Begin of main program   </span>
 
-<span style="color: #008000">int</span> main(<span style="color: #008000">int</span> argc, char<span style="color: #666666">*</span> argv[])
+<span style="color: #B00040">int</span> <span style="color: #0000FF">main</span>(<span style="color: #B00040">int</span> argc, <span style="color: #B00040">char</span><span style="color: #666666">*</span> argv[])
 {
-  <span style="color: #008000">int</span>       i, j, Dim, lOrbital;
-  double    RMin, RMax, Step, DiagConst, NondiagConst, OrbitalFactor; 
-  <span style="color: #666666">//</span> With spherical coordinates RMin <span style="color: #666666">=</span> <span style="color: #666666">0</span> always
+  <span style="color: #B00040">int</span>       i, j, Dim, lOrbital;
+  <span style="color: #B00040">double</span>    RMin, RMax, Step, DiagConst, NondiagConst, OrbitalFactor; 
+  <span style="color: #408080; font-style: italic">// With spherical coordinates RMin = 0 always</span>
   RMin <span style="color: #666666">=</span> <span style="color: #666666">0.0</span>;
 
   RMax <span style="color: #666666">=</span> <span style="color: #666666">8.0</span>;  lOrbital <span style="color: #666666">=</span> <span style="color: #666666">0</span>;  Dim <span style="color: #666666">=2000</span>;  
   mat Hamiltonian <span style="color: #666666">=</span> zeros<span style="color: #666666">&lt;</span>mat<span style="color: #666666">&gt;</span>(Dim,Dim);
-  <span style="color: #666666">//</span> Integration step length
+  <span style="color: #408080; font-style: italic">// Integration step length</span>
   Step    <span style="color: #666666">=</span> RMax<span style="color: #666666">/</span> Dim;
   DiagConst <span style="color: #666666">=</span> <span style="color: #666666">2.0</span> <span style="color: #666666">/</span> (Step<span style="color: #666666">*</span>Step);
   NondiagConst <span style="color: #666666">=</span>  <span style="color: #666666">-1.0</span> <span style="color: #666666">/</span> (Step<span style="color: #666666">*</span>Step);
   OrbitalFactor <span style="color: #666666">=</span> lOrbital <span style="color: #666666">*</span> (lOrbital <span style="color: #666666">+</span> <span style="color: #666666">1.0</span>);
   
-  <span style="color: #666666">//</span> local memory <span style="color: #008000; font-weight: bold">for</span> r <span style="color: #AA22FF; font-weight: bold">and</span> the potential w[r] 
+  <span style="color: #408080; font-style: italic">// local memory for r and the potential w[r] </span>
   vec r(Dim); vec w(Dim);
   <span style="color: #008000; font-weight: bold">for</span>(i <span style="color: #666666">=</span> <span style="color: #666666">0</span>; i <span style="color: #666666">&lt;</span> Dim; i<span style="color: #666666">++</span>) {
     r(i) <span style="color: #666666">=</span> RMin <span style="color: #666666">+</span> (i<span style="color: #666666">+1</span>) <span style="color: #666666">*</span> Step;
@@ -1704,7 +1713,7 @@ void output(double, double, <span style="color: #008000">int</span>, vec<span st
   }
 
 
-  <span style="color: #666666">//</span> Setting up tridiagonal matrix <span style="color: #AA22FF; font-weight: bold">and</span> brute diagonalization using Armadillo
+  <span style="color: #408080; font-style: italic">// Setting up tridiagonal matrix and brute diagonalization using Armadillo</span>
   Hamiltonian(<span style="color: #666666">0</span>,<span style="color: #666666">0</span>) <span style="color: #666666">=</span> DiagConst <span style="color: #666666">+</span> w(<span style="color: #666666">0</span>);
   Hamiltonian(<span style="color: #666666">0</span>,<span style="color: #666666">1</span>) <span style="color: #666666">=</span> NondiagConst;
   <span style="color: #008000; font-weight: bold">for</span>(i <span style="color: #666666">=</span> <span style="color: #666666">1</span>; i <span style="color: #666666">&lt;</span> Dim<span style="color: #666666">-1</span>; i<span style="color: #666666">++</span>) {
@@ -1714,34 +1723,34 @@ void output(double, double, <span style="color: #008000">int</span>, vec<span st
   }
   Hamiltonian(Dim<span style="color: #666666">-1</span>,Dim<span style="color: #666666">-2</span>) <span style="color: #666666">=</span> NondiagConst;
   Hamiltonian(Dim<span style="color: #666666">-1</span>,Dim<span style="color: #666666">-1</span>) <span style="color: #666666">=</span> DiagConst <span style="color: #666666">+</span> w(Dim<span style="color: #666666">-1</span>);
-  <span style="color: #666666">//</span> diagonalize <span style="color: #AA22FF; font-weight: bold">and</span> obtain eigenvalues
+  <span style="color: #408080; font-style: italic">// diagonalize and obtain eigenvalues</span>
   vec Eigval(Dim);
   eig_sym(Eigval, Hamiltonian);
   output(RMin , RMax, Dim, Eigval);
 
   <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">0</span>;
-}  <span style="color: #666666">//</span>  end of main function
+}  <span style="color: #408080; font-style: italic">//  end of main function</span>
 
 
-<span style="color: #666666">/*</span>
-  The function potential()
-  calculates <span style="color: #AA22FF; font-weight: bold">and</span> <span style="color: #008000; font-weight: bold">return</span> the value of the 
-  potential <span style="color: #008000; font-weight: bold">for</span> a given argument x<span style="color: #666666">.</span>
-  The potential here <span style="color: #AA22FF; font-weight: bold">is</span> <span style="color: #008000; font-weight: bold">for</span> the hydrogen atom
-<span style="color: #666666">*/</span>        
+<span style="color: #408080; font-style: italic">/*</span>
+<span style="color: #408080; font-style: italic">  The function potential()</span>
+<span style="color: #408080; font-style: italic">  calculates and return the value of the </span>
+<span style="color: #408080; font-style: italic">  potential for a given argument x.</span>
+<span style="color: #408080; font-style: italic">  The potential here is for the hydrogen atom</span>
+<span style="color: #408080; font-style: italic">*/</span>        
 
-double potential(double x)
+<span style="color: #B00040">double</span> <span style="color: #0000FF">potential</span>(<span style="color: #B00040">double</span> x)
 {
   <span style="color: #008000; font-weight: bold">return</span> x<span style="color: #666666">*</span>x;
 
-} <span style="color: #666666">//</span> End: function potential()  
+} <span style="color: #408080; font-style: italic">// End: function potential()  </span>
 
 
-void output(double RMin , double RMax, <span style="color: #008000">int</span> Dim, vec<span style="color: #666666">&amp;</span> d)
+<span style="color: #B00040">void</span> <span style="color: #0000FF">output</span>(<span style="color: #B00040">double</span> RMin , <span style="color: #B00040">double</span> RMax, <span style="color: #B00040">int</span> Dim, vec<span style="color: #666666">&amp;</span> d)
 {
-  <span style="color: #008000">int</span> i;
+  <span style="color: #B00040">int</span> i;
   cout <span style="color: #666666">&lt;&lt;</span> <span style="color: #BA2121">&quot;RESULTS:&quot;</span> <span style="color: #666666">&lt;&lt;</span> endl;
-  cout <span style="color: #666666">&lt;&lt;</span> setiosflags(ios::showpoint <span style="color: #666666">|</span> ios::uppercase);
+  cout <span style="color: #666666">&lt;&lt;</span> setiosflags(ios<span style="color: #666666">::</span>showpoint <span style="color: #666666">|</span> ios<span style="color: #666666">::</span>uppercase);
   cout <span style="color: #666666">&lt;&lt;</span><span style="color: #BA2121">&quot;Rmin = &quot;</span> <span style="color: #666666">&lt;&lt;</span> setw(<span style="color: #666666">15</span>) <span style="color: #666666">&lt;&lt;</span> setprecision(<span style="color: #666666">8</span>) <span style="color: #666666">&lt;&lt;</span> RMin <span style="color: #666666">&lt;&lt;</span> endl;  
   cout <span style="color: #666666">&lt;&lt;</span><span style="color: #BA2121">&quot;Rmax = &quot;</span> <span style="color: #666666">&lt;&lt;</span> setw(<span style="color: #666666">15</span>) <span style="color: #666666">&lt;&lt;</span> setprecision(<span style="color: #666666">8</span>) <span style="color: #666666">&lt;&lt;</span> RMax <span style="color: #666666">&lt;&lt;</span> endl;  
   cout <span style="color: #666666">&lt;&lt;</span><span style="color: #BA2121">&quot;Number of steps = &quot;</span> <span style="color: #666666">&lt;&lt;</span> setw(<span style="color: #666666">15</span>) <span style="color: #666666">&lt;&lt;</span> Dim <span style="color: #666666">&lt;&lt;</span> endl;  
@@ -1749,7 +1758,7 @@ void output(double RMin , double RMax, <span style="color: #008000">int</span> D
   <span style="color: #008000; font-weight: bold">for</span>(i <span style="color: #666666">=</span> <span style="color: #666666">0</span>; i <span style="color: #666666">&lt;</span> <span style="color: #666666">5</span>; i<span style="color: #666666">++</span>) {
     cout <span style="color: #666666">&lt;&lt;</span> setw(<span style="color: #666666">15</span>) <span style="color: #666666">&lt;&lt;</span> setprecision(<span style="color: #666666">8</span>) <span style="color: #666666">&lt;&lt;</span> d[i] <span style="color: #666666">&lt;&lt;</span> endl;
   }
-}  <span style="color: #666666">//</span> end of function output         
+}  <span style="color: #408080; font-style: italic">// end of function output         </span>
 </pre></div>
 
 </div>
@@ -1758,7 +1767,80 @@ void output(double RMin , double RMax, <span style="color: #008000">int</span> D
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec47">Discussion of Householder's method for eigenvalues </h2>
+<h2 id="___sec47">The corresponding Python program </h2>
+The code sets up the Hamiltonian matrix by defining the the minimun and maximum values of \( r \) with a maximum value of integration points.  These are set in the initialization function. It plots the  eigenfunctions of the three lowest eigenstates.
+<p>
+
+
+<div class="compute"><script type="text/x-sage">
+#Program which solves the one-particle Schrodinger equation 
+#for a potential specified in function
+#potential(). This example is for the harmonic oscillator in 3d
+
+from  matplotlib import pyplot as plt
+import numpy as np
+#Function for initialization of parameters
+def initialize():
+    RMin = 0.0
+    RMax = 10.0
+    lOrbital = 0
+    Dim = 400
+    return RMin, RMax, lOrbital, Dim
+# Here we set up the harmonic oscillator potential
+def potential(r):
+    return r*r
+
+#Get the boundary, orbital momentum and number of integration points
+RMin, RMax, lOrbital, Dim = initialize()
+
+#Initialize constants
+Step    = RMax/(Dim+1)
+DiagConst = 2.0 / (Step*Step)
+NondiagConst =  -1.0 / (Step*Step)
+OrbitalFactor = lOrbital * (lOrbital + 1.0)
+
+#Calculate array of potential values
+v = np.zeros(Dim)
+r = np.linspace(RMin,RMax,Dim)
+for i in xrange(Dim):
+    r[i] = RMin + (i+1) * Step;
+    v[i] = potential(r[i]) + OrbitalFactor/(r[i]*r[i]);
+
+#Setting up a tridiagonal matrix and finding eigenvectors and eigenvalues
+Hamiltonian = np.zeros((Dim,Dim))
+Hamiltonian[0,0] = DiagConst + v[0];
+Hamiltonian[0,1] = NondiagConst;
+for i in xrange(1,Dim-1):
+    Hamiltonian[i,i-1]  = NondiagConst;
+    Hamiltonian[i,i]    = DiagConst + v[i];
+    Hamiltonian[i,i+1]  = NondiagConst;
+Hamiltonian[Dim-1,Dim-2] = NondiagConst;
+Hamiltonian[Dim-1,Dim-1] = DiagConst + v[Dim-1];
+# diagonalize and obtain eigenvalues, not necessarily sorted
+EigValues, EigVectors = np.linalg.eig(Hamiltonian)
+# sort eigenvectors and eigenvalues
+permute = EigValues.argsort()
+EigValues = EigValues[permute]
+EigVectors = EigVectors[:,permute]
+# now plot the results for the three lowest lying eigenstates
+for i in xrange(3):
+    print EigValues[i]
+FirstEigvector = EigVectors[:,0]
+SecondEigvector = EigVectors[:,1]
+ThirdEigvector = EigVectors[:,2]
+plt.plot(r, FirstEigvector**2 ,'b-',r, SecondEigvector**2 ,'g-',r, ThirdEigvector**2 ,'r-')
+plt.axis([0,4.6,0.0, 0.025])
+plt.xlabel(r'$r$')
+plt.ylabel(r'Radial probability $r^2|R(r)|^2$')
+plt.title(r'Radial probability distributions for three lowest-lying states')
+plt.savefig('eigenvector.pdf')
+plt.show()
+
+</script></div>
+<p>
+<!-- !split --><br><br><br><br><br><br><br><br><br><br>
+
+<h2 id="___sec48">Discussion of Householder's method for eigenvalues </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -1781,7 +1863,7 @@ elements are already in tridiagonal form.
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec48">Discussion of Householder's method for eigenvalues </h2>
+<h2 id="___sec49">Discussion of Householder's method for eigenvalues </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -1804,7 +1886,7 @@ where the primed quantities represent a matrix \( \mathbf{A}' \) of dimension
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec49">Discussion of Householder's method for eigenvalues </h2>
+<h2 id="___sec50">Discussion of Householder's method for eigenvalues </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -1827,7 +1909,7 @@ $$
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec50">Discussion of Householder's method for eigenvalues </h2>
+<h2 id="___sec51">Discussion of Householder's method for eigenvalues </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -1847,7 +1929,7 @@ $$
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec51">Discussion of Householder's method for eigenvalues </h2>
+<h2 id="___sec52">Discussion of Householder's method for eigenvalues </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -1868,7 +1950,7 @@ $$
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec52">Discussion of Householder's method for eigenvalues </h2>
+<h2 id="___sec53">Discussion of Householder's method for eigenvalues </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -1896,7 +1978,7 @@ column vector with norm \( \mathbf{u}^T\mathbf{u} \) (inner product).
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec53">Discussion of Householder's method for eigenvalues </h2>
+<h2 id="___sec54">Discussion of Householder's method for eigenvalues </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -1930,7 +2012,7 @@ with \( \mathbf{e^{T}} = \{1,0,0,\dots 0\} \).
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec54">Discussion of Householder's method for eigenvalues </h2>
+<h2 id="___sec55">Discussion of Householder's method for eigenvalues </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -1950,7 +2032,7 @@ which determines the constant $ k = \pm v$.
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec55">Discussion of Householder's method for eigenvalues </h2>
+<h2 id="___sec56">Discussion of Householder's method for eigenvalues </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -1984,7 +2066,7 @@ tridiagonal matrix suitable for obtaining the eigenvalues.
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec56">Discussion of Householder's method for eigenvalues </h2>
+<h2 id="___sec57">Discussion of Householder's method for eigenvalues </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -2012,7 +2094,7 @@ eigenvalue.
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec57">Discussion of Householder's method for eigenvalues </h2>
+<h2 id="___sec58">Discussion of Householder's method for eigenvalues </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -2050,7 +2132,7 @@ eigenvalue  \( = a_{11}^{'} = d_{1}^{'} \).
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec58">Discussion of Householder's method for eigenvalues </h2>
+<h2 id="___sec59">Discussion of Householder's method for eigenvalues </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -2073,7 +2155,7 @@ planar rotations. For a tridiagonal matrix it is simple to carry out in principl
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec59">Eigenvalues with the <em>QR</em> and Lanczos methods </h2>
+<h2 id="___sec60">Eigenvalues with the <em>QR</em> and Lanczos methods </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -2101,7 +2183,7 @@ eigenvalue.
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec60">Eigenvalues with the <em>QR</em> and Lanczos methods </h2>
+<h2 id="___sec61">Eigenvalues with the <em>QR</em> and Lanczos methods </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -2135,7 +2217,7 @@ changed by the transformation whereas the unprimed elements are unchanged.
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec61">Eigenvalues with the <em>QR</em> and Lanczos methods </h2>
+<h2 id="___sec62">Eigenvalues with the <em>QR</em> and Lanczos methods </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -2161,7 +2243,7 @@ The algorithm is based on the so-called <b>QR</b> method (or just <b>QR</b>-algo
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec62">Eigenvalues with the <b>QR</b> algorithm and Lanczos' method </h2>
+<h2 id="___sec63">Eigenvalues with the <b>QR</b> algorithm and Lanczos' method </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -2188,7 +2270,7 @@ There is a corollary to Schur's theorem which states that every Hermitian matrix
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec63">Eigenvalues with the <b>QR</b> algorithm and Lanczos' method </h2>
+<h2 id="___sec64">Eigenvalues with the <b>QR</b> algorithm and Lanczos' method </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -2210,7 +2292,7 @@ as \( \hat{B} \).
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec64">Eigenvalues with the <b>QR</b> algorithm and Lanczos' method </h2>
+<h2 id="___sec65">Eigenvalues with the <b>QR</b> algorithm and Lanczos' method </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -2235,7 +2317,7 @@ $$
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec65">Eigenvalues with the <b>QR</b> algorithm and Lanczos' method </h2>
+<h2 id="___sec66">Eigenvalues with the <b>QR</b> algorithm and Lanczos' method </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -2258,7 +2340,7 @@ $$
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec66">Eigenvalues with the <b>QR</b> algorithm and Lanczos' method </h2>
+<h2 id="___sec67">Eigenvalues with the <b>QR</b> algorithm and Lanczos' method </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -2283,7 +2365,7 @@ which has a second superdiagonal.
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec67">Eigenvalues with the <b>QR</b> algorithm and Lanczos' method </h2>
+<h2 id="___sec68">Eigenvalues with the <b>QR</b> algorithm and Lanczos' method </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -2306,7 +2388,7 @@ Our matrix \( \hat{B}=\hat{U}\hat{Q} \).
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec68">Eigenvalues with the <b>QR</b> algorithm and Lanczos' method </h2>
+<h2 id="___sec69">Eigenvalues with the <b>QR</b> algorithm and Lanczos' method </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -2336,7 +2418,7 @@ $$
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec69">Eigenvalues with the <b>QR</b> algorithm and Lanczos' method </h2>
+<h2 id="___sec70">Eigenvalues with the <b>QR</b> algorithm and Lanczos' method </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -2358,7 +2440,7 @@ However, for large matrices this algorithm is rather inefficient and time-consum
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec70">Eigenvalues and Lanczos' method </h2>
+<h2 id="___sec71">Eigenvalues and Lanczos' method </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -2393,7 +2475,7 @@ $$
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec71">Eigenvalues and Lanczos' method, tridiagonal matrix </h2>
+<h2 id="___sec72">Eigenvalues and Lanczos' method, tridiagonal matrix </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -2419,7 +2501,7 @@ $$
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec72">Eigenvalues and Lanczos' method, tridiagonal and orthogonal matrices </h2>
+<h2 id="___sec73">Eigenvalues and Lanczos' method, tridiagonal and orthogonal matrices </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -2443,7 +2525,7 @@ $$
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec73">Eigenvalues and Lanczos' method </h2>
+<h2 id="___sec74">Eigenvalues and Lanczos' method </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -2469,7 +2551,7 @@ $$
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec74">Eigenvalues and Lanczos' method, defining the Lanczos' vectors  </h2>
+<h2 id="___sec75">Eigenvalues and Lanczos' method, defining the Lanczos' vectors  </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -2490,7 +2572,7 @@ and these vectors are called Lanczos vectors.
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec75">Eigenvalues and Lanczos' method, basic steps </h2>
+<h2 id="___sec76">Eigenvalues and Lanczos' method, basic steps </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
