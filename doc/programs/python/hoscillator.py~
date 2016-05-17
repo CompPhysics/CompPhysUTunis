@@ -7,9 +7,9 @@ import numpy as np
 #Function for initialization of parameters
 def initialize():
     RMin = 0.0
-    RMax = 10.0
+    RMax = 5.0
     lOrbital = 0
-    Dim = 400
+    Dim = 100
     return RMin, RMax, lOrbital, Dim
 # Here we set up the harmonic oscillator potential
 def potential(r):
