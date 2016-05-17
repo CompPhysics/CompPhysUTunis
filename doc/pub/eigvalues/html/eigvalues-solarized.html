@@ -185,8 +185,11 @@ $(function () {
                2,
                None,
                '___sec46'),
-              ('The corresponding Python program', 2, None, '___sec47'),
-              ("Discussion of Householder's method for eigenvalues",
+              ('"The corresponding Python program":"https://github.com/CompPhysics/CompPhysUTunis/tree/master/doc/programs/python/hoscillator.py"',
+               2,
+               None,
+               '___sec47'),
+              ('"The corresponding Python program for the interactive case":"https://github.com/CompPhysics/CompPhysUTunis/tree/master/doc/programs/python/interaction.py"',
                2,
                None,
                '___sec48'),
@@ -234,7 +237,7 @@ $(function () {
                2,
                None,
                '___sec59'),
-              ('Eigenvalues with the *QR* and Lanczos methods',
+              ("Discussion of Householder's method for eigenvalues",
                2,
                None,
                '___sec60'),
@@ -246,7 +249,7 @@ $(function () {
                2,
                None,
                '___sec62'),
-              ("Eigenvalues with the _QR_ algorithm and Lanczos' method",
+              ('Eigenvalues with the *QR* and Lanczos methods',
                2,
                None,
                '___sec63'),
@@ -278,24 +281,28 @@ $(function () {
                2,
                None,
                '___sec70'),
-              ("Eigenvalues and Lanczos' method", 2, None, '___sec71'),
+              ("Eigenvalues with the _QR_ algorithm and Lanczos' method",
+               2,
+               None,
+               '___sec71'),
+              ("Eigenvalues and Lanczos' method", 2, None, '___sec72'),
               ("Eigenvalues and Lanczos' method, tridiagonal matrix",
                2,
                None,
-               '___sec72'),
+               '___sec73'),
               ("Eigenvalues and Lanczos' method, tridiagonal and orthogonal matrices",
                2,
                None,
-               '___sec73'),
-              ("Eigenvalues and Lanczos' method", 2, None, '___sec74'),
+               '___sec74'),
+              ("Eigenvalues and Lanczos' method", 2, None, '___sec75'),
               ("Eigenvalues and Lanczos' method, defining the Lanczos' vectors",
                2,
                None,
-               '___sec75'),
+               '___sec76'),
               ("Eigenvalues and Lanczos' method, basic steps",
                2,
                None,
-               '___sec76')]}
+               '___sec77')]}
 end of tocinfo -->
 
 <body>
@@ -1762,7 +1769,7 @@ The following program uses the eigenvalue solver provided by Armadillo and retur
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec47">The corresponding Python program </h2>
+<h2 id="___sec47"><a href="https://github.com/CompPhysics/CompPhysUTunis/tree/master/doc/programs/python/hoscillator.py" target="_blank">The corresponding Python program</a> </h2>
 The code sets up the Hamiltonian matrix by defining the the minimun and maximum values of \( r \) with a maximum value of integration points.  These are set in the initialization function. It plots the  eigenfunctions of the three lowest eigenstates.
 <p>
 
@@ -1835,7 +1842,98 @@ plt.show()
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec48">Discussion of Householder's method for eigenvalues </h2>
+<h2 id="___sec48"><a href="https://github.com/CompPhysics/CompPhysUTunis/tree/master/doc/programs/python/interaction.py" target="_blank">The corresponding Python program for the interactive case</a> </h2>
+<p>
+
+
+<div class="compute"><script type="text/x-sage">
+#Program which solves the one-particle Schrodinger equation 
+#for a potential specified in function
+#potential(). This example is for the harmonic oscillator in 3d with a repulsive Coulomb interaction
+
+from  matplotlib import pyplot as plt
+import numpy as np
+#Function for initialization of parameters
+def initialize():
+    RMin = 0.0
+    RMax = 10.0
+    lOrbital = 0
+    Dim = 600
+    omega = 1.0
+    return RMin, RMax, lOrbital, Dim, omega
+# Here we set up the harmonic oscillator potential
+def potential(r):
+    return r*r
+# Here we set up the harmonic oscillator potential with interaction
+def intpotential(r,omega):
+    return omega*omega*r*r+1.0/r
+
+#Get the boundary, orbital momentum and number of integration points
+RMin, RMax, lOrbital, Dim, omega = initialize()
+
+#Initialize constants
+Step    = RMax/(Dim+1)
+DiagConst = 2.0 / (Step*Step)
+NondiagConst =  -1.0 / (Step*Step)
+OrbitalFactor = lOrbital * (lOrbital + 1.0)
+
+#Calculate array of potential values
+v = np.zeros(Dim)
+vint = np.zeros(Dim)
+r = np.linspace(RMin,RMax,Dim)
+for i in xrange(Dim):
+    r[i] = RMin + (i+1) * Step;
+    v[i] = potential(r[i]) + OrbitalFactor/(r[i]*r[i]);
+    vint[i] = intpotential(r[i],omega) + OrbitalFactor/(r[i]*r[i]);
+
+#Setting up a tridiagonal matrix and finding eigenvectors and eigenvalues
+Hamiltonian = np.zeros((Dim,Dim))
+IntHamiltonian = np.zeros((Dim,Dim))
+Hamiltonian[0,0] = DiagConst + v[0];
+Hamiltonian[0,1] = NondiagConst;
+IntHamiltonian[0,0] = DiagConst + vint[0];
+IntHamiltonian[0,1] = NondiagConst;
+for i in xrange(1,Dim-1):
+    Hamiltonian[i,i-1]  = NondiagConst;
+    Hamiltonian[i,i]    = DiagConst + v[i];
+    Hamiltonian[i,i+1]  = NondiagConst;
+    IntHamiltonian[i,i-1]  = NondiagConst;
+    IntHamiltonian[i,i]    = DiagConst + vint[i];
+    IntHamiltonian[i,i+1]  = NondiagConst;
+
+Hamiltonian[Dim-1,Dim-2] = NondiagConst;
+Hamiltonian[Dim-1,Dim-1] = DiagConst + v[Dim-1];
+IntHamiltonian[Dim-1,Dim-2] = NondiagConst;
+IntHamiltonian[Dim-1,Dim-1] = DiagConst + vint[Dim-1];
+# diagonalize and obtain eigenvalues, not necessarily sorted
+EigValues, EigVectors = np.linalg.eig(Hamiltonian)
+EigValuesInt, EigVectorsInt = np.linalg.eig(IntHamiltonian)
+# sort eigenvectors and eigenvalues
+permute = EigValues.argsort()
+EigValues = EigValues[permute]
+EigVectors = EigVectors[:,permute]
+permute = EigValuesInt.argsort()
+EigValuesInt = EigValuesInt[permute]
+EigVectorsInt = EigVectorsInt[:,permute]
+# now plot the results for the three lowest lying eigenstates
+for i in xrange(1):
+    print EigValues[i], EigValuesInt[i], 
+FirstEigvector = EigVectors[:,0]
+FirstEigvectorInt = EigVectorsInt[:,0]
+plt.plot(r, FirstEigvector**2 ,'b-',r, FirstEigvectorInt**2 ,'g-')
+plt.axis([0,3.0,0.0, 0.015])
+plt.xlabel(r'$r$')
+plt.ylabel(r'Radial probability $r^2|R(r)|^2$')
+plt.title(r'Radial probability distributions for three lowest-lying states')
+plt.savefig('eigenvectorint.pdf')
+plt.show()
+
+
+</script></div>
+<p>
+<!-- !split --><br><br><br><br><br><br><br><br><br><br>
+
+<h2 id="___sec49">Discussion of Householder's method for eigenvalues </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -1858,7 +1956,7 @@ elements are already in tridiagonal form.
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec49">Discussion of Householder's method for eigenvalues </h2>
+<h2 id="___sec50">Discussion of Householder's method for eigenvalues </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -1881,7 +1979,7 @@ where the primed quantities represent a matrix \( \mathbf{A}' \) of dimension
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec50">Discussion of Householder's method for eigenvalues </h2>
+<h2 id="___sec51">Discussion of Householder's method for eigenvalues </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -1904,7 +2002,7 @@ $$
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec51">Discussion of Householder's method for eigenvalues </h2>
+<h2 id="___sec52">Discussion of Householder's method for eigenvalues </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -1924,7 +2022,7 @@ $$
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec52">Discussion of Householder's method for eigenvalues </h2>
+<h2 id="___sec53">Discussion of Householder's method for eigenvalues </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -1945,7 +2043,7 @@ $$
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec53">Discussion of Householder's method for eigenvalues </h2>
+<h2 id="___sec54">Discussion of Householder's method for eigenvalues </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -1973,7 +2071,7 @@ column vector with norm \( \mathbf{u}^T\mathbf{u} \) (inner product).
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec54">Discussion of Householder's method for eigenvalues </h2>
+<h2 id="___sec55">Discussion of Householder's method for eigenvalues </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -2007,7 +2105,7 @@ with \( \mathbf{e^{T}} = \{1,0,0,\dots 0\} \).
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec55">Discussion of Householder's method for eigenvalues </h2>
+<h2 id="___sec56">Discussion of Householder's method for eigenvalues </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -2027,7 +2125,7 @@ which determines the constant $ k = \pm v$.
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec56">Discussion of Householder's method for eigenvalues </h2>
+<h2 id="___sec57">Discussion of Householder's method for eigenvalues </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -2061,7 +2159,7 @@ tridiagonal matrix suitable for obtaining the eigenvalues.
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec57">Discussion of Householder's method for eigenvalues </h2>
+<h2 id="___sec58">Discussion of Householder's method for eigenvalues </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -2089,7 +2187,7 @@ eigenvalue.
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec58">Discussion of Householder's method for eigenvalues </h2>
+<h2 id="___sec59">Discussion of Householder's method for eigenvalues </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -2127,7 +2225,7 @@ eigenvalue  \( = a_{11}^{'} = d_{1}^{'} \).
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec59">Discussion of Householder's method for eigenvalues </h2>
+<h2 id="___sec60">Discussion of Householder's method for eigenvalues </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -2150,7 +2248,7 @@ planar rotations. For a tridiagonal matrix it is simple to carry out in principl
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec60">Eigenvalues with the <em>QR</em> and Lanczos methods </h2>
+<h2 id="___sec61">Eigenvalues with the <em>QR</em> and Lanczos methods </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -2178,7 +2276,7 @@ eigenvalue.
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec61">Eigenvalues with the <em>QR</em> and Lanczos methods </h2>
+<h2 id="___sec62">Eigenvalues with the <em>QR</em> and Lanczos methods </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -2212,7 +2310,7 @@ changed by the transformation whereas the unprimed elements are unchanged.
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec62">Eigenvalues with the <em>QR</em> and Lanczos methods </h2>
+<h2 id="___sec63">Eigenvalues with the <em>QR</em> and Lanczos methods </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -2238,7 +2336,7 @@ The algorithm is based on the so-called <b>QR</b> method (or just <b>QR</b>-algo
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec63">Eigenvalues with the <b>QR</b> algorithm and Lanczos' method </h2>
+<h2 id="___sec64">Eigenvalues with the <b>QR</b> algorithm and Lanczos' method </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -2265,7 +2363,7 @@ There is a corollary to Schur's theorem which states that every Hermitian matrix
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec64">Eigenvalues with the <b>QR</b> algorithm and Lanczos' method </h2>
+<h2 id="___sec65">Eigenvalues with the <b>QR</b> algorithm and Lanczos' method </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -2287,7 +2385,7 @@ as \( \hat{B} \).
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec65">Eigenvalues with the <b>QR</b> algorithm and Lanczos' method </h2>
+<h2 id="___sec66">Eigenvalues with the <b>QR</b> algorithm and Lanczos' method </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -2312,7 +2410,7 @@ $$
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec66">Eigenvalues with the <b>QR</b> algorithm and Lanczos' method </h2>
+<h2 id="___sec67">Eigenvalues with the <b>QR</b> algorithm and Lanczos' method </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -2335,7 +2433,7 @@ $$
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec67">Eigenvalues with the <b>QR</b> algorithm and Lanczos' method </h2>
+<h2 id="___sec68">Eigenvalues with the <b>QR</b> algorithm and Lanczos' method </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -2360,7 +2458,7 @@ which has a second superdiagonal.
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec68">Eigenvalues with the <b>QR</b> algorithm and Lanczos' method </h2>
+<h2 id="___sec69">Eigenvalues with the <b>QR</b> algorithm and Lanczos' method </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -2383,7 +2481,7 @@ Our matrix \( \hat{B}=\hat{U}\hat{Q} \).
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec69">Eigenvalues with the <b>QR</b> algorithm and Lanczos' method </h2>
+<h2 id="___sec70">Eigenvalues with the <b>QR</b> algorithm and Lanczos' method </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -2413,7 +2511,7 @@ $$
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec70">Eigenvalues with the <b>QR</b> algorithm and Lanczos' method </h2>
+<h2 id="___sec71">Eigenvalues with the <b>QR</b> algorithm and Lanczos' method </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -2435,7 +2533,7 @@ However, for large matrices this algorithm is rather inefficient and time-consum
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec71">Eigenvalues and Lanczos' method </h2>
+<h2 id="___sec72">Eigenvalues and Lanczos' method </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -2470,7 +2568,7 @@ $$
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec72">Eigenvalues and Lanczos' method, tridiagonal matrix </h2>
+<h2 id="___sec73">Eigenvalues and Lanczos' method, tridiagonal matrix </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -2496,7 +2594,7 @@ $$
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec73">Eigenvalues and Lanczos' method, tridiagonal and orthogonal matrices </h2>
+<h2 id="___sec74">Eigenvalues and Lanczos' method, tridiagonal and orthogonal matrices </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -2520,7 +2618,7 @@ $$
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec74">Eigenvalues and Lanczos' method </h2>
+<h2 id="___sec75">Eigenvalues and Lanczos' method </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -2546,7 +2644,7 @@ $$
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec75">Eigenvalues and Lanczos' method, defining the Lanczos' vectors  </h2>
+<h2 id="___sec76">Eigenvalues and Lanczos' method, defining the Lanczos' vectors  </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>
@@ -2567,7 +2665,7 @@ and these vectors are called Lanczos vectors.
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec76">Eigenvalues and Lanczos' method, basic steps </h2>
+<h2 id="___sec77">Eigenvalues and Lanczos' method, basic steps </h2>
 <div class="alert alert-block alert-block alert-text-normal">
 <b></b>
 <p>

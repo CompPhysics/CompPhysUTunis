@@ -195,7 +195,7 @@ CONTAINS
     INTEGER :: n 
     REAL(DP)  :: d(n),e(n),z(n,n)
     INTEGER :: i,iter,k,l,m
-    REAL(DP)  :: b,c,dd,f,g,p,r,s,pythag,one
+    REAL(DP)  :: b,c,dd,f,g,p,r,s,one
 
     DO i=2,n
        e(i-1)=e(i)
