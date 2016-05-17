@@ -9,7 +9,7 @@ def initialize():
     RMin = 0.0
     RMax = 10.0
     lOrbital = 0
-    Dim = 400
+    Dim = 600
     return RMin, RMax, lOrbital, Dim
 # Here we set up the harmonic oscillator potential
 def potential(r):
@@ -54,7 +54,7 @@ FirstEigvector = EigVectors[:,0]
 SecondEigvector = EigVectors[:,1]
 ThirdEigvector = EigVectors[:,2]
 plt.plot(r, FirstEigvector**2 ,'b-',r, SecondEigvector**2 ,'g-',r, ThirdEigvector**2 ,'r-')
-plt.axis([0,4.6,0.0, 0.025])
+plt.axis([0,5.,0.0, 0.025])
 plt.xlabel(r'$r$')
 plt.ylabel(r'Radial probability $r^2|R(r)|^2$')
 plt.title(r'Radial probability distributions for three lowest-lying states')
