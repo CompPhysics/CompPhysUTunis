@@ -9,7 +9,7 @@ def initialize():
     RMin = 0.0
     RMax = 10.0
     lOrbital = 0
-    Dim = 600
+    Dim = 400
     return RMin, RMax, lOrbital, Dim
 # Here we set up the harmonic oscillator potential
 def potential(r):

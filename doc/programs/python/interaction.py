@@ -13,8 +13,8 @@ def initialize():
     omega = 1.0
     return RMin, RMax, lOrbital, Dim, omega
 # Here we set up the harmonic oscillator potential
-def potential(r):
-    return r*r
+def potential(r,omega):
+    return r*r*omega*omega
 # Here we set up the harmonic oscillator potential with interaction
 def intpotential(r,omega):
     return omega*omega*r*r+1.0/r
@@ -34,7 +34,7 @@ vint = np.zeros(Dim)
 r = np.linspace(RMin,RMax,Dim)
 for i in xrange(Dim):
     r[i] = RMin + (i+1) * Step;
-    v[i] = potential(r[i]) + OrbitalFactor/(r[i]*r[i]);
+    v[i] = potential(r[i],omega) + OrbitalFactor/(r[i]*r[i]);
     vint[i] = intpotential(r[i],omega) + OrbitalFactor/(r[i]*r[i]);
 
 #Setting up a tridiagonal matrix and finding eigenvectors and eigenvalues
