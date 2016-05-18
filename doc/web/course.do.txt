@@ -10,10 +10,11 @@ AUTHOR: "Morten Hjorth-Jensen":"http://mhjgit.github.io/info/" at Department of 
 
 <%
 pub_url = 'http://compphysics.github.io/CompPhysUTunis/doc/pub'
-published = ['intro', 'eigvalues', 'vmc', ]
+published = ['intro', 'eigvalues', 'hfock', 'vmc', ]
 chapters = {
  'intro': 'Introduction to computational physics',
  'eigvalues': 'Diagonalization and eigenvalue problems',
+ 'hfock': 'Hartree-Fock theory',
  'vmc': 'Quantum mechanical systems',
 }
 %>
@@ -32,7 +33,6 @@ chapters = {
  * HTML:
    * "Plain html": "${pub_url}/${name}/html/${name}.html"
    * "reveal.js beige slide style": "${pub_url}/${name}/html/${name}-reveal.html"
-   * "Bootstrap  slide style, easy for reading on mobile devices": "${pub_url}/${name}/html/${name}-bs.html"
  * iPython notebook:
    * "ipynb file": "${pub_url}/${name}/ipynb/${name}.ipynb"
 </%def>

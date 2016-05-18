@@ -43,7 +43,6 @@ formulas in HTML or ipython notebook files.
  * HTML:
    * "Plain html": "http://compphysics.github.io/CompPhysUTunis/doc/pub/intro/html/intro.html"
    * "reveal.js beige slide style": "http://compphysics.github.io/CompPhysUTunis/doc/pub/intro/html/intro-reveal.html"
-   * "Bootstrap  slide style, easy for reading on mobile devices": "http://compphysics.github.io/CompPhysUTunis/doc/pub/intro/html/intro-bs.html"
  * iPython notebook:
    * "ipynb file": "http://compphysics.github.io/CompPhysUTunis/doc/pub/intro/ipynb/intro.ipynb"
 
@@ -60,9 +59,24 @@ formulas in HTML or ipython notebook files.
  * HTML:
    * "Plain html": "http://compphysics.github.io/CompPhysUTunis/doc/pub/eigvalues/html/eigvalues.html"
    * "reveal.js beige slide style": "http://compphysics.github.io/CompPhysUTunis/doc/pub/eigvalues/html/eigvalues-reveal.html"
-   * "Bootstrap  slide style, easy for reading on mobile devices": "http://compphysics.github.io/CompPhysUTunis/doc/pub/eigvalues/html/eigvalues-bs.html"
  * iPython notebook:
    * "ipynb file": "http://compphysics.github.io/CompPhysUTunis/doc/pub/eigvalues/ipynb/eigvalues.ipynb"
+
+
+===== Hartree-Fock theory =====
+
+
+
+ * LaTeX PDF:
+   * For printing:
+     * "Standard one-page format": "http://compphysics.github.io/CompPhysUTunis/doc/pub/hfock/pdf/hfock-print.pdf", compact: "6 pages per sheet": "http://compphysics.github.io/CompPhysUTunis/doc/pub/hfock/pdf/hfock-print6.pdf"
+   * For screen viewing:
+     * "standard Beamer format": "http://compphysics.github.io/CompPhysUTunis/doc/pub/hfock/pdf/hfock-beamer.pdf"
+ * HTML:
+   * "Plain html": "http://compphysics.github.io/CompPhysUTunis/doc/pub/hfock/html/hfock.html"
+   * "reveal.js beige slide style": "http://compphysics.github.io/CompPhysUTunis/doc/pub/hfock/html/hfock-reveal.html"
+ * iPython notebook:
+   * "ipynb file": "http://compphysics.github.io/CompPhysUTunis/doc/pub/hfock/ipynb/hfock.ipynb"
 
 
 ===== Quantum mechanical systems =====
@@ -77,7 +91,6 @@ formulas in HTML or ipython notebook files.
  * HTML:
    * "Plain html": "http://compphysics.github.io/CompPhysUTunis/doc/pub/vmc/html/vmc.html"
    * "reveal.js beige slide style": "http://compphysics.github.io/CompPhysUTunis/doc/pub/vmc/html/vmc-reveal.html"
-   * "Bootstrap  slide style, easy for reading on mobile devices": "http://compphysics.github.io/CompPhysUTunis/doc/pub/vmc/html/vmc-bs.html"
  * iPython notebook:
    * "ipynb file": "http://compphysics.github.io/CompPhysUTunis/doc/pub/vmc/ipynb/vmc.ipynb"
 
