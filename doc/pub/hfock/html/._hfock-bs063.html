@@ -183,14 +183,34 @@ Automatically generated HTML file from DocOnce source
                2,
                None,
                '___sec61'),
-              ('Exercise 1: Hartree-Fock Slater determinant',
+              ('Developing a  Hartree-Fock program, Hamiltonian',
                2,
                None,
                '___sec62'),
-              ('Exercise 2: Developing a  Hartree-Fock program',
+              ('Developing a  Hartree-Fock program, Hartree-Fock matrix',
                2,
                None,
-               '___sec63')]}
+               '___sec63'),
+              ('Developing a  Hartree-Fock program, Hartree-Fock eigenvalue problem',
+               2,
+               None,
+               '___sec64'),
+              ('Developing a  Hartree-Fock program, density matrix',
+               2,
+               None,
+               '___sec65'),
+              ('Developing a  Hartree-Fock program, example program in Python',
+               2,
+               None,
+               '___sec66'),
+              ('"Developing a  Hartree-Fock program, program example in python":"https://github.com/CompPhysics/CompPhysUTunis/tree/master/doc/programs/python/hfqdots.py"',
+               2,
+               None,
+               '___sec67'),
+              ('Exercise 1: Hartree-Fock Slater determinant',
+               2,
+               None,
+               '___sec68')]}
 end of tocinfo -->
 
 <body>
@@ -290,8 +310,13 @@ MathJax.Hub.Config({
      <!-- navigation toc: --> <li><a href="._hfock-bs060.html#___sec59" style="font-size: 80%;">Analysis of Hartree-Fock equations and Koopman's theorem</a></li>
      <!-- navigation toc: --> <li><a href="._hfock-bs061.html#___sec60" style="font-size: 80%;">Analysis of Hartree-Fock equations and Koopman's theorem</a></li>
      <!-- navigation toc: --> <li><a href="._hfock-bs062.html#___sec61" style="font-size: 80%;">Analysis of Hartree-Fock equations and Koopman's theorem</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec62" style="font-size: 80%;">Exercise 1: Hartree-Fock Slater determinant</a></li>
-     <!-- navigation toc: --> <li><a href="._hfock-bs064.html#___sec63" style="font-size: 80%;">Exercise 2: Developing a  Hartree-Fock program</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec62" style="font-size: 80%;">Developing a  Hartree-Fock program, Hamiltonian</a></li>
+     <!-- navigation toc: --> <li><a href="._hfock-bs064.html#___sec63" style="font-size: 80%;">Developing a  Hartree-Fock program, Hartree-Fock matrix</a></li>
+     <!-- navigation toc: --> <li><a href="._hfock-bs065.html#___sec64" style="font-size: 80%;">Developing a  Hartree-Fock program, Hartree-Fock eigenvalue problem</a></li>
+     <!-- navigation toc: --> <li><a href="._hfock-bs066.html#___sec65" style="font-size: 80%;">Developing a  Hartree-Fock program, density matrix</a></li>
+     <!-- navigation toc: --> <li><a href="._hfock-bs067.html#___sec66" style="font-size: 80%;">Developing a  Hartree-Fock program, example program in Python</a></li>
+     <!-- navigation toc: --> <li><a href="._hfock-bs068.html#___sec67" style="font-size: 80%;">"Developing a  Hartree-Fock program, program example in python":"https://github.com/CompPhysics/CompPhysUTunis/tree/master/doc/programs/python/hfqdots.py"</a></li>
+     <!-- navigation toc: --> <li><a href="._hfock-bs069.html#___sec68" style="font-size: 80%;">Exercise 1: Hartree-Fock Slater determinant</a></li>
 
         </ul>
       </li>
@@ -307,66 +332,16 @@ MathJax.Hub.Config({
 <a name="part0063"></a>
 <!-- !split -->
 
-<p>
-<!-- --- begin exercise --- -->
-
-<h2 id="___sec62">Exercise 1: Hartree-Fock Slater determinant </h2>
+<h2 id="___sec62">Developing a  Hartree-Fock program, Hamiltonian  </h2>
 
 <p>
-<div class="panel panel-default">
-<div class="panel-body">
-<p> <!-- subsequent paragraphs come in larger fonts, so start with a paragraph -->
-Consider a Slater determinant built up of orthogonal single-particle orbitals \( \psi_{\lambda} \), 
-with \( \lambda = 1,2,\dots,A \).
-
-<p>
-The unitary transformation
+The Hamiltonian for a system of \( N \) electrons confined in a
+harmonic potential reads
 $$
-\psi_a  = \sum_{\lambda} C_{a\lambda}\phi_{\lambda},
+\hat{H} = \sum_{i=1}^{N} \frac{\hat{p}_{i}^{2}}{2m}+\sum_{i=1}^{N} \frac{1}{2} m\omega {r}_{i}^{2}+\sum_{i < j} \hat{V}_{ij},
 $$
 
-brings us into the new basis.  
-The new basis has quantum numbers \( a=1,2,\dots,A \).
-
-<p>
-<b>a)</b>
-Show that the new basis is orthogonal.
-
-<p>
-<b>b)</b>
-Show that the new Slater determinant constructed from the new single-particle wave functions can be
-written as the determinant based on the previous basis and the determinant of the matrix \( C \).
-
-<p>
-<b>c)</b>
-Show that the old and the new Slater determinants are equal up to a complex constant with absolute value unity.
-
-<p>
-<!-- --- begin hint in exercise --- -->
-
-<p>
-<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
- data-target="#exer_1_1" style="font-size: 80%;"></a>
-<b>Hint.</b>
-<div class="collapse-group">
-<p><div class="collapse" id="exer_1_1">
-
-<p>
-Hint: \( C \) is a unitary matrix.
-
-<p>
-</div></p>
-</div>
-</p>
-
-<p>
-<!-- --- end hint in exercise --- -->
-</div>
-</div>
-
-
-<p>
-<!-- --- end exercise --- -->
+where \( \hat{V}_{ij} \) is the two-body interaction.
 
 <p>
 <p>
@@ -385,6 +360,11 @@ Hint: \( C \) is a unitary matrix.
   <li><a href="._hfock-bs062.html">63</a></li>
   <li class="active"><a href="._hfock-bs063.html">64</a></li>
   <li><a href="._hfock-bs064.html">65</a></li>
+  <li><a href="._hfock-bs065.html">66</a></li>
+  <li><a href="._hfock-bs066.html">67</a></li>
+  <li><a href="._hfock-bs067.html">68</a></li>
+  <li><a href="._hfock-bs068.html">69</a></li>
+  <li><a href="._hfock-bs069.html">70</a></li>
   <li><a href="._hfock-bs064.html">&raquo;</a></li>
 </ul>
 <!-- ------------------- end of main content --------------- -->
