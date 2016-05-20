@@ -1,7 +1,7 @@
 import numpy as np
 from decimal import Decimal
 # expectation value for the one body part, Harmonic oscillator in two dimensions
-def onebody(i, n, m):
+def onebody(i, n, l):
         homega = 1.0
         return homega*(2*n[i] + m[i] + 1)
 
@@ -25,7 +25,7 @@ if __name__ == '__main__':
 
         """ Read two-electron interaction elements (integrals) from file, brute force 4-dim array """
         interaction = np.zeros([spOrbitals, spOrbitals, spOrbitals, spOrbitals])
-        with open("twobody.dat", "r") as infile:
+        with open("nucleitwobody.dat", "r") as infile:
                 for line in infile:
                         number = line.split()
                         a = int(number[0]) - 1
@@ -69,7 +69,7 @@ teraction in m-scheme """
                             for gamma in range(spOrbitals):
                                 for delta in range(spOrbitals):
                                     if (mj[alpha]+mj[gamma]) != (mj[beta]+mj[delta]): continue
-                                    sumFockTerm += DensityMatrix[gamma][delta]*interaction[alpha][gamma][b\
+                                    sumFockTerm += DensityMatrix[gamma][delta]*nninteraction[alpha][gamma][b\
 eta][delta]
                             HFmatrix[alpha][beta] = Decimal(sumFockTerm)
                             """  Adding the one-body term, here plain harmonic oscillator """

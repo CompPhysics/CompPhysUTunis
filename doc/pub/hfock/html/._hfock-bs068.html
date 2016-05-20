@@ -281,7 +281,7 @@ MathJax.Hub.Config({
      <!-- navigation toc: --> <li><a href="._hfock-bs019.html#___sec18" style="font-size: 80%;">Definitions and notations</a></li>
      <!-- navigation toc: --> <li><a href="._hfock-bs020.html#___sec19" style="font-size: 80%;">Definitions and notations</a></li>
      <!-- navigation toc: --> <li><a href="._hfock-bs021.html#___sec20" style="font-size: 80%;">Definitions and notations</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec21" style="font-size: 80%;">Definitions and notations</a></li>
+     <!-- navigation toc: --> <li><a href="._hfock-bs022.html#___sec21" style="font-size: 80%;">Definitions and notations</a></li>
      <!-- navigation toc: --> <li><a href="._hfock-bs023.html#___sec22" style="font-size: 80%;">Compact functional</a></li>
      <!-- navigation toc: --> <li><a href="._hfock-bs024.html#___sec23" style="font-size: 80%;">Properties of the interaction elements</a></li>
      <!-- navigation toc: --> <li><a href="._hfock-bs025.html#___sec24" style="font-size: 80%;">Redefining the matrix elements</a></li>
@@ -327,7 +327,7 @@ MathJax.Hub.Config({
      <!-- navigation toc: --> <li><a href="._hfock-bs065.html#___sec64" style="font-size: 80%;">Developing a  Hartree-Fock program, Hartree-Fock eigenvalue problem</a></li>
      <!-- navigation toc: --> <li><a href="._hfock-bs066.html#___sec65" style="font-size: 80%;">Developing a  Hartree-Fock program, density matrix</a></li>
      <!-- navigation toc: --> <li><a href="._hfock-bs067.html#___sec66" style="font-size: 80%;">Developing a  Hartree-Fock program, example program in Python</a></li>
-     <!-- navigation toc: --> <li><a href="._hfock-bs068.html#___sec67" style="font-size: 80%;">"Developing a  Hartree-Fock program, program example in python":"https://github.com/CompPhysics/CompPhysUTunis/tree/master/doc/programs/python/hfqdots.py"</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec67" style="font-size: 80%;">"Developing a  Hartree-Fock program, program example in python":"https://github.com/CompPhysics/CompPhysUTunis/tree/master/doc/programs/python/hfqdots.py"</a></li>
      <!-- navigation toc: --> <li><a href="._hfock-bs069.html#___sec68" style="font-size: 80%;">Expressions for the Coulomb interaction for electrons in quantum dots</a></li>
      <!-- navigation toc: --> <li><a href="._hfock-bs070.html#___sec69" style="font-size: 80%;">"Expressions for the Coulomb interaction for electrons in quantum dots":"https://github.com/CompPhysics/CompPhysUTunis/tree/master/doc/programs/cpp/coulomb.cpp"</a></li>
      <!-- navigation toc: --> <li><a href="._hfock-bs071.html#___sec70" style="font-size: 80%;">Expressions for the Coulomb interaction for electrons in quantum dots</a></li>
@@ -344,57 +344,129 @@ MathJax.Hub.Config({
 
 <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
 
-<a name="part0022"></a>
+<a name="part0068"></a>
 <!-- !split -->
 
-<h2 id="___sec21">Definitions and notations </h2>
-<div class="panel panel-default">
-<div class="panel-body">
-<p> <!-- subsequent paragraphs come in larger fonts, so start with a paragraph -->
-We introduce the following shorthands for the above two integrals
-$$
-\langle \mu\nu|\hat{v}|\mu\nu\rangle =  \int \psi_{\mu}^*(x_i)\psi_{\nu}^*(x_j)\hat{v}(r_{ij})\psi_{\mu}(x_i)\psi_{\nu}(x_j)
-    dx_idx_j,
-$$
+<h2 id="___sec67"><a href="https://github.com/CompPhysics/CompPhysUTunis/tree/master/doc/programs/python/hfqdots.py" target="_self">Developing a  Hartree-Fock program, program example in python</a>  </h2>
+<p>
 
-and
-$$
-\langle \mu\nu|\hat{v}|\nu\mu\rangle = \int \psi_{\mu}^*(x_i)\psi_{\nu}^*(x_j)
-  \hat{v}(r_{ij})\psi_{\nu}(x_i)\psi_{\mu}(x_j)
-  dx_idx_j.  
-$$
-</div>
-</div>
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span> 
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">decimal</span> <span style="color: #008000; font-weight: bold">import</span> Decimal
+<span style="color: #408080; font-style: italic"># expectation value for the one body part, Harmonic oscillator in two dimensions</span>
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">onebody</span>(i, n, m):
+	homega <span style="color: #666666">=</span> <span style="color: #666666">1.0</span>
+	<span style="color: #008000; font-weight: bold">return</span> homega<span style="color: #666666">*</span>(<span style="color: #666666">2*</span>n[i] <span style="color: #666666">+</span> m[i] <span style="color: #666666">+</span> <span style="color: #666666">1</span>)
+
+<span style="color: #008000; font-weight: bold">if</span> __name__ <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;__main__&#39;</span>:
+	
+        Nparticles <span style="color: #666666">=</span> <span style="color: #666666">2</span>
+	<span style="color: #BA2121; font-style: italic">&quot;&quot;&quot; Read quantum numbers from file &quot;&quot;&quot;</span>
+        index <span style="color: #666666">=</span> []
+	n <span style="color: #666666">=</span> []
+        mj <span style="color: #666666">=</span> []
+	spOrbitals <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+	<span style="color: #008000; font-weight: bold">with</span> <span style="color: #008000">open</span>(<span style="color: #BA2121">&quot;qdnumbers.dat&quot;</span>, <span style="color: #BA2121">&quot;r&quot;</span>) <span style="color: #008000; font-weight: bold">as</span> qnumfile:
+		<span style="color: #008000; font-weight: bold">for</span> line <span style="color: #AA22FF; font-weight: bold">in</span> qnumfile:
+			nums <span style="color: #666666">=</span> line<span style="color: #666666">.</span>split()
+			<span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">len</span>(nums) <span style="color: #666666">!=</span> <span style="color: #666666">0</span>:
+				index<span style="color: #666666">.</span>append(<span style="color: #008000">int</span>(nums[<span style="color: #666666">0</span>]))
+				n<span style="color: #666666">.</span>append(<span style="color: #008000">int</span>(nums[<span style="color: #666666">1</span>]))
+				mj<span style="color: #666666">.</span>append(<span style="color: #008000">int</span>(nums[<span style="color: #666666">4</span>]))
+				spOrbitals <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
 
 
+	<span style="color: #BA2121; font-style: italic">&quot;&quot;&quot; Read two-electron interaction elements (integrals) from file, brute force 4-dim array &quot;&quot;&quot;</span>
+	interaction <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros([spOrbitals, spOrbitals, spOrbitals, spOrbitals])
+	<span style="color: #008000; font-weight: bold">with</span> <span style="color: #008000">open</span>(<span style="color: #BA2121">&quot;twobody.dat&quot;</span>, <span style="color: #BA2121">&quot;r&quot;</span>) <span style="color: #008000; font-weight: bold">as</span> infile:
+		<span style="color: #008000; font-weight: bold">for</span> line <span style="color: #AA22FF; font-weight: bold">in</span> infile:
+			number <span style="color: #666666">=</span> line<span style="color: #666666">.</span>split()
+			a <span style="color: #666666">=</span> <span style="color: #008000">int</span>(number[<span style="color: #666666">0</span>]) <span style="color: #666666">-</span> <span style="color: #666666">1</span>
+			b <span style="color: #666666">=</span> <span style="color: #008000">int</span>(number[<span style="color: #666666">1</span>]) <span style="color: #666666">-</span> <span style="color: #666666">1</span>
+			c <span style="color: #666666">=</span> <span style="color: #008000">int</span>(number[<span style="color: #666666">2</span>]) <span style="color: #666666">-</span> <span style="color: #666666">1</span>
+			d <span style="color: #666666">=</span> <span style="color: #008000">int</span>(number[<span style="color: #666666">3</span>]) <span style="color: #666666">-</span> <span style="color: #666666">1</span>
+			<span style="color: #408080; font-style: italic">#print a, b, c, d, float(l[4])</span>
+			interaction[a][b][c][d] <span style="color: #666666">=</span> Decimal(number[<span style="color: #666666">4</span>])
+	<span style="color: #BA2121; font-style: italic">&quot;&quot;&quot; Set up single-particle integral &quot;&quot;&quot;</span>
+	singleparticleH <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros(spOrbitals)
+	<span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(spOrbitals):
+		singleparticleH[i] <span style="color: #666666">=</span> Decimal(onebody(i, n, m))
+	
+	<span style="color: #BA2121; font-style: italic">&quot;&quot;&quot; Star HF-iterations, preparing variables and density matrix &quot;&quot;&quot;</span>
+
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot; Coefficients for setting up density matrix, assuming only one along the diagonals &quot;&quot;&quot;</span>
+	C <span style="color: #666666">=</span> np<span style="color: #666666">.</span>eye(spOrbitals) <span style="color: #408080; font-style: italic"># HF coefficients</span>
+        DensityMatrix <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros([spOrbitals,spOrbitals])
+        <span style="color: #008000; font-weight: bold">for</span> gamma <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(spOrbitals):
+            <span style="color: #008000; font-weight: bold">for</span> delta <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(spOrbitals):
+                <span style="color: #008000">sum</span> <span style="color: #666666">=</span> <span style="color: #666666">0.0</span>
+                <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(Nparticles):
+                    <span style="color: #008000">sum</span> <span style="color: #666666">+=</span> C[gamma][i]<span style="color: #666666">*</span>C[delta][i]
+                DensityMatrix[gamma][delta] <span style="color: #666666">=</span> Decimal(<span style="color: #008000">sum</span>)
+        maxHFiter <span style="color: #666666">=</span> <span style="color: #666666">100</span>
+        epsilon <span style="color: #666666">=</span>  <span style="color: #666666">1.0e-5</span> 
+        difference <span style="color: #666666">=</span> <span style="color: #666666">1.0</span>
+	hf_count <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+	oldenergies <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros(spOrbitals)
+	newenergies <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros(spOrbitals)
+	<span style="color: #008000; font-weight: bold">while</span> hf_count <span style="color: #666666">&lt;</span> maxHFiter <span style="color: #AA22FF; font-weight: bold">and</span> difference <span style="color: #666666">&gt;</span> epsilon:
+		<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&quot;############### Iteration </span><span style="color: #BB6688; font-weight: bold">%i</span><span style="color: #BA2121"> ###############&quot;</span> <span style="color: #666666">%</span> hf_count
+   	        HFmatrix <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros([spOrbitals,spOrbitals])		
+		<span style="color: #008000; font-weight: bold">for</span> alpha <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(spOrbitals):
+			<span style="color: #008000; font-weight: bold">for</span> beta <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(spOrbitals):
+                            <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;  If tests for two-dimensional system &quot;&quot;&quot;</span>
+                            <span style="color: #008000; font-weight: bold">if</span> mj[alpha] <span style="color: #666666">!=</span> mj[beta]: <span style="color: #008000; font-weight: bold">continue</span>
+                            <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;  Setting up the Fock matrix using the density matrix and antisymmetrized  interaction in m-scheme &quot;&quot;&quot;</span>
+     		            sumFockTerm <span style="color: #666666">=</span> <span style="color: #666666">0.0</span>
+                            <span style="color: #008000; font-weight: bold">for</span> gamma <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(spOrbitals):
+                                <span style="color: #008000; font-weight: bold">for</span> delta <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(spOrbitals):
+                                    <span style="color: #008000; font-weight: bold">if</span> (mj[alpha]<span style="color: #666666">+</span>mj[gamma]) <span style="color: #666666">!=</span> (mj[beta]<span style="color: #666666">+</span>mj[delta]): <span style="color: #008000; font-weight: bold">continue</span>
+                                    sumFockTerm <span style="color: #666666">+=</span> DensityMatrix[gamma][delta]<span style="color: #666666">*</span>interaction[alpha][gamma][beta][delta]
+                            HFmatrix[alpha][beta] <span style="color: #666666">=</span> Decimal(sumFockTerm)
+                            <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;  Adding the one-body term, here plain harmonic oscillator &quot;&quot;&quot;</span>
+                            <span style="color: #008000; font-weight: bold">if</span> beta <span style="color: #666666">==</span> alpha:   HFmatrix[alpha][alpha] <span style="color: #666666">+=</span> singleparticleH[alpha]
+		spenergies, C <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linalg<span style="color: #666666">.</span>eigh(HFmatrix)
+                <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot; Setting up new density matrix in m-scheme &quot;&quot;&quot;</span>
+                DensityMatrix <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros([spOrbitals,spOrbitals])
+                <span style="color: #008000; font-weight: bold">for</span> gamma <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(spOrbitals):
+                    <span style="color: #008000; font-weight: bold">for</span> delta <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(spOrbitals):
+                        <span style="color: #008000">sum</span> <span style="color: #666666">=</span> <span style="color: #666666">0.0</span>
+                        <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(Nparticles):
+                            <span style="color: #008000">sum</span> <span style="color: #666666">+=</span> C[gamma][i]<span style="color: #666666">*</span>C[delta][i]
+                        DensityMatrix[gamma][delta] <span style="color: #666666">=</span> Decimal(<span style="color: #008000">sum</span>)
+		newenergies <span style="color: #666666">=</span> spenergies
+                <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot; Brute force computation of difference between previous and new sp HF energies &quot;&quot;&quot;</span>
+                <span style="color: #008000">sum</span> <span style="color: #666666">=0.0</span>
+                <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(spOrbitals):
+                    <span style="color: #008000">sum</span> <span style="color: #666666">+=</span> (<span style="color: #008000">abs</span>(newenergies[i]<span style="color: #666666">-</span>oldenergies[i]))<span style="color: #666666">/</span>spOrbitals
+                difference <span style="color: #666666">=</span> <span style="color: #008000">sum</span>
+                oldenergies <span style="color: #666666">=</span> newenergies
+                <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&quot;Single-particle energies, ordering may have changed &quot;</span>
+                <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(spOrbitals):
+                    <span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&#39;{0:4d}  {1:.4f}&#39;</span><span style="color: #666666">.</span>format(i, Decimal(oldenergies[i])))
+		hf_count <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
+</pre></div>
 <p>
 <p>
 <!-- navigation buttons at the bottom of the page -->
 <ul class="pagination">
-<li><a href="._hfock-bs021.html">&laquo;</a></li>
+<li><a href="._hfock-bs067.html">&laquo;</a></li>
   <li><a href="._hfock-bs000.html">1</a></li>
   <li><a href="">...</a></li>
-  <li><a href="._hfock-bs014.html">15</a></li>
-  <li><a href="._hfock-bs015.html">16</a></li>
-  <li><a href="._hfock-bs016.html">17</a></li>
-  <li><a href="._hfock-bs017.html">18</a></li>
-  <li><a href="._hfock-bs018.html">19</a></li>
-  <li><a href="._hfock-bs019.html">20</a></li>
-  <li><a href="._hfock-bs020.html">21</a></li>
-  <li><a href="._hfock-bs021.html">22</a></li>
-  <li class="active"><a href="._hfock-bs022.html">23</a></li>
-  <li><a href="._hfock-bs023.html">24</a></li>
-  <li><a href="._hfock-bs024.html">25</a></li>
-  <li><a href="._hfock-bs025.html">26</a></li>
-  <li><a href="._hfock-bs026.html">27</a></li>
-  <li><a href="._hfock-bs027.html">28</a></li>
-  <li><a href="._hfock-bs028.html">29</a></li>
-  <li><a href="._hfock-bs029.html">30</a></li>
-  <li><a href="._hfock-bs030.html">31</a></li>
-  <li><a href="._hfock-bs031.html">32</a></li>
-  <li><a href="">...</a></li>
+  <li><a href="._hfock-bs060.html">61</a></li>
+  <li><a href="._hfock-bs061.html">62</a></li>
+  <li><a href="._hfock-bs062.html">63</a></li>
+  <li><a href="._hfock-bs063.html">64</a></li>
+  <li><a href="._hfock-bs064.html">65</a></li>
+  <li><a href="._hfock-bs065.html">66</a></li>
+  <li><a href="._hfock-bs066.html">67</a></li>
+  <li><a href="._hfock-bs067.html">68</a></li>
+  <li class="active"><a href="._hfock-bs068.html">69</a></li>
+  <li><a href="._hfock-bs069.html">70</a></li>
+  <li><a href="._hfock-bs070.html">71</a></li>
+  <li><a href="._hfock-bs071.html">72</a></li>
   <li><a href="._hfock-bs072.html">73</a></li>
-  <li><a href="._hfock-bs023.html">&raquo;</a></li>
+  <li><a href="._hfock-bs069.html">&raquo;</a></li>
 </ul>
 <!-- ------------------- end of main content --------------- -->
 

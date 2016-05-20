@@ -236,10 +236,22 @@ div { text-align: justify; text-justify: inter-word; }
                2,
                None,
                '___sec67'),
+              ('Expressions for the Coulomb interaction for electrons in quantum dots',
+               2,
+               None,
+               '___sec68'),
+              ('"Expressions for the Coulomb interaction for electrons in quantum dots":"https://github.com/CompPhysics/CompPhysUTunis/tree/master/doc/programs/cpp/coulomb.cpp"',
+               2,
+               None,
+               '___sec69'),
+              ('Expressions for the Coulomb interaction for electrons in quantum dots',
+               2,
+               None,
+               '___sec70'),
               ('Exercise 1: Hartree-Fock Slater determinant',
                2,
                None,
-               '___sec68')]}
+               '___sec71')]}
 end of tocinfo -->
 
 <body>
@@ -1902,7 +1914,7 @@ The input file qdnumbers.dat can contain the information of all single-particle 
 <div class="highlight" style="background: #eeeedd"><pre style="line-height: 125%"><span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">numpy</span> <span style="color: #8B008B; font-weight: bold">as</span> <span style="color: #008b45; text-decoration: underline">np</span> 
 <span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">decimal</span> <span style="color: #8B008B; font-weight: bold">import</span> Decimal
 <span style="color: #228B22"># expectation value for the one body part, Harmonic oscillator in two dimensions</span>
-<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">onebody</span>(i, n, l):
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">onebody</span>(i, n, m):
 	homega = <span style="color: #B452CD">1.0</span>
 	<span style="color: #8B008B; font-weight: bold">return</span> homega*(<span style="color: #B452CD">2</span>*n[i] + m[i] + <span style="color: #B452CD">1</span>)
 
@@ -1926,7 +1938,7 @@ The input file qdnumbers.dat can contain the information of all single-particle 
 
 	<span style="color: #CD5555">&quot;&quot;&quot; Read two-electron interaction elements (integrals) from file, brute force 4-dim array &quot;&quot;&quot;</span>
 	interaction = np.zeros([spOrbitals, spOrbitals, spOrbitals, spOrbitals])
-	<span style="color: #8B008B; font-weight: bold">with</span> <span style="color: #658b00">open</span>(<span style="color: #CD5555">&quot;nucleitwobody.dat&quot;</span>, <span style="color: #CD5555">&quot;r&quot;</span>) <span style="color: #8B008B; font-weight: bold">as</span> infile:
+	<span style="color: #8B008B; font-weight: bold">with</span> <span style="color: #658b00">open</span>(<span style="color: #CD5555">&quot;twobody.dat&quot;</span>, <span style="color: #CD5555">&quot;r&quot;</span>) <span style="color: #8B008B; font-weight: bold">as</span> infile:
 		<span style="color: #8B008B; font-weight: bold">for</span> line <span style="color: #8B008B">in</span> infile:
 			number = line.split()
 			a = <span style="color: #658b00">int</span>(number[<span style="color: #B452CD">0</span>]) - <span style="color: #B452CD">1</span>
@@ -1969,7 +1981,7 @@ The input file qdnumbers.dat can contain the information of all single-particle 
                             <span style="color: #8B008B; font-weight: bold">for</span> gamma <span style="color: #8B008B">in</span> <span style="color: #658b00">range</span>(spOrbitals):
                                 <span style="color: #8B008B; font-weight: bold">for</span> delta <span style="color: #8B008B">in</span> <span style="color: #658b00">range</span>(spOrbitals):
                                     <span style="color: #8B008B; font-weight: bold">if</span> (mj[alpha]+mj[gamma]) != (mj[beta]+mj[delta]): <span style="color: #8B008B; font-weight: bold">continue</span>
-                                    sumFockTerm += DensityMatrix[gamma][delta]*nninteraction[alpha][gamma][beta][delta]
+                                    sumFockTerm += DensityMatrix[gamma][delta]*interaction[alpha][gamma][beta][delta]
                             HFmatrix[alpha][beta] = Decimal(sumFockTerm)
                             <span style="color: #CD5555">&quot;&quot;&quot;  Adding the one-body term, here plain harmonic oscillator &quot;&quot;&quot;</span>
                             <span style="color: #8B008B; font-weight: bold">if</span> beta == alpha:   HFmatrix[alpha][alpha] += singleparticleH[alpha]
@@ -1997,10 +2009,87 @@ The input file qdnumbers.dat can contain the information of all single-particle 
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br><br><br>
 
+<h2 id="___sec68">Expressions for the Coulomb interaction for electrons in quantum dots  </h2>
+<div class="alert alert-block alert-block alert-text-normal">
+<b></b>
+<p>
+In order to perform the above quantum dots calculations you need either to pre-compute the two-body Coulomb integrals or add a function to the above program that computes the integrals on the fly. The expression for the Coulomb matrix elements 
+are taken from the article of  <a href="http://iopscience.iop.org/article/10.1088/0953-8984/10/3/013" target="_blank">E. Anisimovas and A. Matulis</a>, J. Phys.: Condens. Matter <b>10</b>,  601 (1998).
+
+<p>
+At the webpage of the course we provide a file called coulomb.cpp which computes
+the Coulomb matrix element \( \langle 12 |V|34 \rangle \) where the \( 1, 2, 3 \) and \( 4 \) are four single-particle state indices.
+Each state \( |p(=1,2,3, 4) \rangle \) can be rewritten in terms of its quantum numbers. In two dimensions, it reads \( |p \rangle=|n_p m_p s_p \rangle \). For simplicity the angular momentum projection quantum number \( m_l \) will just be written as \( m \) in the following equations.
+
+
+</div>
+
+
+<p>
+<!-- !split --><br><br><br><br><br><br><br><br><br><br>
+
+<h2 id="___sec69"><a href="https://github.com/CompPhysics/CompPhysUTunis/tree/master/doc/programs/cpp/coulomb.cpp" target="_blank">Expressions for the Coulomb interaction for electrons in quantum dots</a>  </h2>
+<div class="alert alert-block alert-block alert-text-normal">
+<b></b>
+<p>
+The function \( coulomb(n1,m1,n2,m2,n3,m3,n4,m4) \)  computes thus the integral.
+Calling this function and paying attention to the spin values, the computation of the direct term is given by
+\( \texttt{direct}  = \delta(ms1,ms3)\delta(ms2,ms4)\times \texttt{coulomb(n1,m1,n2,m2,n4,m4,n3,m3)} \).
+Pay attention to the explanation text in the file coulomb.cpp.
+The expression for the Coulomb integral can be written as 
+$$
+\begin{align*}
+& V_{1234}= \delta_{m_1+m_2,m_3+m_4} \sqrt{ \left[ \prod_{i=1}^4 \frac{n_i !}{(n_i+|m_i|!)} \right] } \\
+&\times \sum_{j_1=0,\dots,j_4=0}^{n_1,\dots,n_4} \Bigg[ \frac{(-1)^{j_1+j_2+j_3+j_4}} {j_1!j_2!j_3!j_4!}\left[ \prod_{k=1}^4 \ \begin{pmatrix} n_k+|m_k|\\ n_k-j_k\end{pmatrix}  \right] \frac{1}{2^{\frac{G+1}{2}}}\\ & \times  \sum_{l_1=0,\dots,l_4=0}^{\gamma_1=0,\dots,\gamma_4=0} \left( \delta_{l_1,l_2} \delta_{l_3,l_4}  (-1)^{\gamma_2+\gamma_3-l_2-l_3} \left[ \prod_{t=1}^4 \begin{pmatrix} \gamma_t\\ l_t\end{pmatrix} \right] \Gamma \left(1+\frac{\Lambda}{2} \right) \; \Gamma \left(\frac{G - \Lambda +1}{2}\right)    \right)  \Bigg]
+\end{align*} 
+$$
+
+where
+$$
+\begin{align*}
+&\gamma_1=j_1+j_4+\frac{|m_1|+m_1}{2}+\frac{|m_4|-m_4}{2} \\
+&\gamma_2=j_2+j_3+\frac{|m_2|+m_2}{2}+\frac{|m_3|-m_3}{2} \\
+&\gamma_3=j_3+j_2+\frac{|m_3|+m_3}{2}+\frac{|m_2|-m_2}{2} \\
+&\gamma_4=j_4+j_1+\frac{|m_4|+m_4}{2}+\frac{|m_1|-m_1}{2} \\
+&G=\gamma_1+\gamma_2+\gamma_3+\gamma_4 \\
+&\Lambda = l_1 +l_2+l_3 +l_4,
+\end{align*}
+$$
+
+when the basis set is built upon the single harmonic oscillator orbitals.
+Note that the integrals do not include spin.
+</div>
+
+
+<p>
+<!-- !split --><br><br><br><br><br><br><br><br><br><br>
+
+<h2 id="___sec70">Expressions for the Coulomb interaction for electrons in quantum dots  </h2>
+<div class="alert alert-block alert-block alert-text-normal">
+<b></b>
+<p>
+The implementation of the program to calculate these matrix elements includes the following subfunctions:
+
+<ul>
+<li> minusPower(int \( k \)) which computes \( (-1)^k \)</li>
+<li> LogFac(int \( n \)) which computes \( log_e(n!) \)</li>
+<li> LogRatio1(int \( j_1 \),int \( j_2 \),int \( j_3 \),int \( j_4 \)) which computes the  \( log_e \) of \( \frac{1}{j_1!j_2!j_3!j_4!} \)</li>
+<li> LogRatio2(int \( G \)) which computes the \( log_e \) of \( \frac{1}{2^{\frac{G+1}{2}}} \)</li>
+<li> Product1(int \( n_1 \),int \( m_1 \),int \( n_2 \),int \( m_2 \), int \( n_3 \),int \( m_3 \),int \( n_4 \),int \( m_4 \)) which computes the explicit (not the \( log_e \)) product \( \sqrt{ \left[ \prod_{i=1}^4 \frac{n_i !}{(n_i+|m_i|!)} \right] } \)</li> 
+<li> LogProduct2(int \( n_1 \),int \( m_1 \),int \( n_2 \),int \( m_2 \), int \( n_3 \),int \( m_3 \),int \( n_4 \),int \( m_4 \), int \( j_1 \),int \( j_2 \),int \( j_3 \),int \( j_4 \) ) which computes the  \( log_e \) of \( \prod_{k=1}^4 \begin{pmatrix} n_k+|m_k|\\n_k-j_k\end{pmatrix} \)</li>
+<li> LogProduct3(int \( l_1 \),int \( l_2 \),int \( l_3 \),int \( l_4 \), int \( \gamma_1 \),int \( \gamma_2 \),int \( \gamma_3 \),int \( \gamma_4 \)) which computes the  \( log_e \) of \( \prod_{t=1}^4 \begin{pmatrix} \gamma_t\\l_t\end{pmatrix} \)</li>
+<li> lgamma(double \( x \)) which computes the  \( log_e\left[ \Gamma(x) \right] \)</li>
+</ul>
+</div>
+
+
+<p>
+<!-- !split --><br><br><br><br><br><br><br><br><br><br>
+
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="___sec68">Exercise 1: Hartree-Fock Slater determinant </h2>
+<h2 id="___sec71">Exercise 1: Hartree-Fock Slater determinant </h2>
 
 <p>
 <div class="alert alert-block alert-block alert-text-normal">
