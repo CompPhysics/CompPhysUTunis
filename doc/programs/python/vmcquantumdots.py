@@ -39,7 +39,7 @@ def wave_function(r):
             for k in xrange(dimension):
                 r_12 += (r[i1,k] - r[i2,k])**2
             argument = math.sqrt(r_12)
-            wf *= math.exp(argument/(1.0+0.3*argument))
+#            wf *= math.exp(0.5*argument/(1.0+0.3*argument))
 
     return wf
 
